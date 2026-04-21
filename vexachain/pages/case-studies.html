@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Case Studies — VexaChain Consulting</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../style.css"/>
+  <style>
+    .cases-section{padding:4rem 3.5rem}
+    .filter-bar{display:flex;gap:0.5rem;flex-wrap:wrap;margin:2rem 0}
+    .filter-btn{font-family:'Syne',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:0.5rem 1rem;border:1px solid var(--paper3);border-radius:2px;cursor:pointer;background:transparent;color:var(--ink2);transition:all 0.15s}
+    .filter-btn:hover,.filter-btn.active{background:var(--accent2);color:#fff;border-color:var(--accent2)}
+    .full-cases-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem}
+    .full-case{background:var(--paper);border:1px solid var(--paper3);border-radius:6px;overflow:hidden;transition:box-shadow 0.2s}
+    .full-case:hover{box-shadow:0 8px 24px rgba(0,0,0,0.08)}
+    .full-case-header{padding:2rem;display:flex;gap:1rem;align-items:flex-start}
+    .case-badge{font-size:2rem;line-height:1;flex-shrink:0}
+    .case-meta .case-ind-full{font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:0.4rem}
+    .case-meta h3{font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:700;line-height:1.2;color:var(--ink);margin-bottom:0.4rem}
+    .case-tag-row{display:flex;gap:0.4rem;flex-wrap:wrap}
+    .full-case-stats{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--paper3);border-bottom:1px solid var(--paper3)}
+    .case-stat{padding:1rem;text-align:center;border-right:1px solid var(--paper3)}
+    .case-stat:last-child{border-right:none}
+    .case-stat-val{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;line-height:1}
+    .case-stat-lbl{font-size:0.65rem;color:var(--ink3);margin-top:3px}
+    .full-case-body{padding:1.5rem}
+    .full-case-body p{font-size:0.85rem;color:var(--ink2);line-height:1.6;margin-bottom:1rem}
+    .expand-toggle{background:none;border:1px solid var(--paper3);border-radius:2px;padding:0.5rem 1rem;font-family:'Syne',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;color:var(--ink2);transition:all 0.15s;margin-top:0.5rem}
+    .expand-toggle:hover{border-color:var(--accent);color:var(--accent)}
+    .case-expanded{display:none;padding:0 1.5rem 1.5rem}
+    .case-expanded.open{display:block}
+    .detail-block{margin-bottom:1.2rem}
+    .detail-block h4{font-family:'Syne',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:0.5rem}
+    .detail-block p{font-size:0.83rem;color:var(--ink2);line-height:1.6}
+    .timeline{display:flex;flex-direction:column;gap:0}
+    .tl-item{display:flex;gap:1rem;align-items:flex-start}
+    .tl-dot{width:10px;height:10px;border-radius:50%;background:var(--accent);margin-top:5px;flex-shrink:0}
+    .tl-line{width:2px;background:var(--paper3);flex:1;min-height:20px;margin-left:4px}
+    .tl-content{padding-bottom:1rem}
+    .tl-phase{font-family:'Syne',sans-serif;font-size:0.75rem;font-weight:700;color:var(--ink);margin-bottom:2px}
+    .tl-desc{font-size:0.78rem;color:var(--ink3)}
+    @media(max-width:900px){.full-cases-grid{grid-template-columns:1fr}}
+    @media(max-width:768px){.cases-section{padding:2.5rem 1.5rem}}
+  </style>
+</head>
+<body>
+<nav>
+  <a href="../index.html" class="logo">VEXA<span>.</span>CHAIN</a>
+  <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">☰</button>
+  <ul id="nav-menu">
+    <li><a href="services.html">Services</a></li>
+    <li><a href="diagnostics.html">Diagnostics</a></li>
+    <li><a href="case-studies.html" style="color:var(--accent)">Case Studies</a></li>
+    <li><a href="platform.html">Data Platform</a></li>
+    <li><a href="dashboard.html" class="nav-cta">Client Login</a></li>
+  </ul>
+</nav>
+<div class="breadcrumb"><a href="../index.html">Home</a><span>›</span> Case Studies</div>
+
+<div class="page-hero">
+  <div class="eyebrow">Client outcomes</div>
+  <h1>Results that speak for themselves.</h1>
+  <p>Six engagements. Real numbers. No vanity metrics. Every outcome below is verified and measurable.</p>
+</div>
+
+<div class="cases-section">
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterCases('all',this)">All industries</button>
+    <button class="filter-btn" onclick="filterCases('automotive',this)">Automotive</button>
+    <button class="filter-btn" onclick="filterCases('fmcg',this)">FMCG</button>
+    <button class="filter-btn" onclick="filterCases('pharma',this)">Pharma</button>
+    <button class="filter-btn" onclick="filterCases('retail',this)">Retail</button>
+    <button class="filter-btn" onclick="filterCases('manufacturing',this)">Manufacturing</button>
+  </div>
+
+  <div class="full-cases-grid">
+
+    <!-- AUTOMOTIVE -->
+    <div class="full-case" id="automotive" data-industry="automotive">
+      <div class="full-case-header">
+        <div class="case-badge">🚗</div>
+        <div class="case-meta">
+          <div class="case-ind-full">Automotive — Tier 1 supplier · 18-month engagement</div>
+          <h3>Logistics network redesign across 4 countries</h3>
+          <div class="case-tag-row"><span class="svc-tag tag-orange" style="margin:0">Logistics</span><span class="svc-tag tag-blue" style="margin:0">Strategy</span></div>
+        </div>
+      </div>
+      <div class="full-case-stats">
+        <div class="case-stat"><div class="case-stat-val" style="color:#c8522a">−31%</div><div class="case-stat-lbl">Logistics cost</div></div>
+        <div class="case-stat"><div class="case-stat-val" style="color:#2e7d52">$18M</div><div class="case-stat-lbl">Annual saving</div></div>
+        <div class="case-stat"><div class="case-stat-val" style="color:#1a3a5c">−2 days</div><div class="case-stat-lbl">Lead time</div></div>
+      </div>
+      <div class="full-case-body">
+        <p>A European Tier 1 automotive supplier was operating a fragmented distribution network inherited from multiple acquisitions. With 12 DCs across 4 countries and inconsistent carrier contracts, logistics costs had risen to 11.4% of revenue — well above the 7–8% industry benchmark.</p>
+        <button class="expand-toggle" onclick="toggleExpand(this)">Read full case study ↓</button>
+      </div>
+      <div class="case-expanded">
+        <div class="detail-block"><h4>The challenge</h4><p>Legacy DC footprint from 3 acquisitions, 47 carrier relationships, no network optimisation model, and logistics cost growth outpacing revenue at 3.2% per year.</p></div>
+        <div class="detail-block"><h4>Our approach</h4>
+          <div class="timeline">
+            <div class="tl-item"><div><div class="tl-dot"></div><div class="tl-line"></div></div><div class="tl-content"><div class="tl-phase">Months 1–3: Diagnostic &amp; baseline</div><div class="tl-desc">Full network cost model built; carrier benchmarking completed across all lanes</div></div></div>
+            <div class="tl-item"><div><div class="tl-dot"></div><div class="tl-line"></div></div><div class="tl-content"><div class="tl-phase">Months 4–8: Network redesign</div><div class="tl-desc">Modelled 14 network configurations; selected 7-DC hub-and-spoke design</div></div></div>
+            <div class="tl-item"><div><div class="tl-dot"></div><div class="tl-line"></div></div><div class="tl-content"><div class="tl-phase">Months 9–18: Implementation</div><div class="tl-desc">Phased DC consolidation, new carrier contracts, and WMS standardisation</div></div></div>
+          </div>
+        </div>
+        <div class="detail-block"><h4>The outcome</h4><p>12 DCs consolidated to 7 regional hubs. Carrier relationships reduced from 47 to 12 strategic partners with volume-leveraged rates. Logistics cost fell from 11.4% to 7.9% of revenue, saving $18M annually. Average delivery lead time reduced by 2 days across the customer base.</p></div>
+      </div>
+    </div>
+
+    <!-- FMCG -->
+    <div class="full-case" id="fmcg" data-industry="fmcg">
+      <div class="full-case-header">
+        <div class="case-badge">🛒</div>
+        <div class="case-meta">
+          <div class="case-ind-full">FMCG — Global CPG brand · 12-month engagement</div>
+          <h3>Demand sensing &amp; AI-powered forecasting</h3>
+          <div class="case-tag-row"><span class="svc-tag tag-blue" style="margin:0">Analytics</span><span class="svc-tag tag-blue" style="margin:0">Technology</span></div>
+        </div>
+      </div>
+      <div class="full-case-stats">
+        <div class="case-stat"><div class="case-stat-val" style="color:#2e7d52">99.1%</div><div class="case-stat-lbl">Forecast accuracy</div></div>
+        <div class="case-stat"><div class="case-stat-val" style="color:#c8522a">−34%</div><div class="case-stat-lbl">Safety stock</div></div>
+        <div class="case-stat"><div class="case-stat-val" style="color:#1a3a5c">$45M</div><div class="case-stat-lbl">WC released</div></div>
+      </div>
+      <div class="full-case-body">
+        <p>A global CPG business with 6,000 SKUs across 28 markets was running a 12-week demand planning cycle based on sales history and sales team input. Forecast accuracy averaged 62% at SKU level, resulting in $120M+ in excess inventory and chronic stockouts on fast-moving lines.</p>
+        <button class="expand-toggle" onclick="toggleExpand(this)">Read full case study ↓</button>
+      </div>
+      <div class="case-expanded">
+        <div class="detail-block"><h4>The challenge</h4><p>62% average SKU-level forecast accuracy, $120M excess stock, and a planning team spending 70% of their time on data preparation rather than decision-making.</p></div>
+        <div class="detail-block"><h4>Our approach</h4>
+          <div class="timeline">
+            <div class="tl-item"><div><div class="tl-dot"></div><div class="tl-line"></div></div><div class="tl-content"><div class="tl-phase">Months 1–2: Data architecture</div><div class="tl-desc">Unified 8 data sources into a single demand signal layer including POS, distributor sell-out, and weather</div></div></div>
+            <div class="tl-item"><div><div class="tl-dot"></div><div class="tl-line"></div></div><div class="tl-content"><div class="tl-phase">Months 3–6: Model development</div><div class="tl-desc">Deployed ensemble ML model with separate algorithms per SKU cluster; planner override UI built</div></div></div>
+            <div class="tl-item"><div><div class="tl-dot"></div><div class="tl-line"></div></div><div class="tl-content"><div class="tl-phase">Months 7–12: Embedding &amp; capability</div><div class="tl-desc">Full S&OP process redesign; planning team upskilled on model interpretation and exception management</div></div></div>
+          </div>
+        </div>
+        <div class="detail-block"><h4>The outcome</h4><p>SKU-level forecast accuracy reached 99.1% on the top 80% of volume. Safety stock reduced by 34%, releasing $45M in working capital. Planning team now spends 80% of their time on value-added decisions rather than data prep.</p></div>
+      </div>
+    </div>
+
+    <!-- PHARMA -->
+    <div class="full-case" id="pharma" data-industry="pharma">
+      <div class="full-case-header">
+        <div class="case-badge">💊</div>
+        <div class="case-meta">
+          <div class="case-ind-full">Pharma — European manufacturer · 24-month engagement</div>
+          <h3>End-to-end supply chain visibility &amp; control tower</h3>
+          <div class="case-tag-row"><span class="svc-tag tag-blue" style="margin:0">Technology</span><span class="svc-tag tag-orange" style="margin:0">Strategy</span></div>
+        </div>
+      </div>
+      <div class="full-case-stats">
+        <div class="case-stat"><div class="case-stat-val" style="color:#b8922a">−58%</div><div class="case-stat-lbl">Lead time</div></div>
+        <div class="case-stat"><div class="case-stat-val" style="color:#2e7d52">140</div><div class="case-stat-lbl">Suppliers integrated</div></div>
+        <div class="case-stat"><div class="case-stat-val" style="color:#1a3a5c">Real-time</div><div class="case-stat-lbl">End-to-end visibility</div></div>
+      </div>
+      <div class="full-case-body">
+        <p>A European pharmaceutical manufacturer with 140 active API and packaging suppliers had zero real-time visibility beyond Tier 1. Critical line shutdowns were occurring 3–4 times per year due to supply disruptions that could have been predicted weeks in advance.</p>
+        <button class="expand-toggle" onclick="toggleExpand(this)">Read full case study ↓</button>
+      </div>
+      <div class="case-expanded">
+        <div class="detail-block"><h4>The challenge</h4><p>3–4 critical line shutdowns per year at $2.8M average cost each. 26-day average order-to-delivery on critical materials. No Tier 2/3 supplier visibility.</p></div>
+        <div class="detail-block"><h4>Our approach</h4>
+          <div class="timeline">
+            <div class="tl-item"><div><div class="tl-dot"></div><div class="tl-line"></div></div><div class="tl-content"><div class="tl-phase">Months 1–6: Architecture &amp; supplier onboarding</div><div class="tl-desc">Control tower platform selected; API integrations built for top 40 suppliers by criticality</div></div></div>
+            <div class="tl-item"><div><div class="tl-dot"></div><div class="tl-line"></div></div><div class="tl-content"><div class="tl-phase">Months 7–14: Full rollout</div><div class="tl-desc">All 140 suppliers onboarded; ML risk scoring deployed with 6-week forward horizon</div></div></div>
+            <div class="tl-item"><div><div class="tl-dot"></div><div class="tl-line"></div></div><div class="tl-content"><div class="tl-phase">Months 15–24: Optimisation</div><div class="tl-desc">Lead time reduction program run in parallel; 22 process improvements implemented across procurement</div></div></div>
+          </div>
+        </div>
+        <div class="detail-block"><h4>The outcome</h4><p>Order-to-delivery lead time reduced from 26 days to 11 days on critical lines. Zero line shutdowns in the 18 months following full deployment. The control tower now surfaces risk signals an average of 19 days before impact, enabling proactive intervention.</p></div>
+      </div>
+    </div>
+
+    <!-- RETAIL -->
+    <div class="full-case" data-industry="retail">
+      <div class="full-case-header">
+        <div class="case-badge">🏪</div>
+        <div class="case-meta">
+          <div class="case-ind-full">Retail — Omnichannel fashion brand · 9-month engagement</div>
+          <h3>Omnichannel fulfilment model transformation</h3>
+          <div class="case-tag-row"><span class="svc-tag tag-orange" style="margin:0">Logistics</span><span class="svc-tag tag-green" style="margin:0">Operations</span></div>
+        </div>
+      </div>
+      <div class="full-case-stats">
+        <div class="case-stat"><div class="case-stat-val" style="color:#c8522a">−44%</div><div class="case-stat-lbl">Fulfilment cost</div></div>
+        <div class="case-stat"><div class="case-stat-val" style="color:#2e7d52">+1.2 days</div><div class="case-stat-lbl">Delivery speed</div></div>
+        <div class="case-stat"><div class="case-stat-val" style="color:#1a3a5c">97.4%</div><div class="case-stat-lbl">Order accuracy</div></div>
+      </div>
+      <div class="full-case-body">
+        <p>A rapidly growing fashion retailer had built its omnichannel operations organically — resulting in duplicate inventory across 3 fulfilment centres, inconsistent customer experience, and a fulfilment cost per order 60% above industry median.</p>
+        <button class="expand-toggle" onclick="toggleExpand(this)">Read full case study ↓</button>
+      </div>
+      <div class="case-expanded">
+        <div class="detail-block"><h4>The challenge</h4><p>£28 average cost-per-order vs £17 sector benchmark. Inventory held in triplicate across channels. Returns processing taking 14 days before restocking.</p></div>
+        <div class="detail-block"><h4>Our approach</h4>
+          <div class="timeline">
+            <div class="tl-item"><div><div class="tl-dot"></div><div class="tl-line"></div></div><div class="tl-content"><div class="tl-phase">Months 1–3: Cost baseline &amp; modelling</div><div class="tl-desc">End-to-end fulfilment cost teardown; single-inventory-pool feasibility study</div></div></div>
+            <div class="tl-item"><div><div class="tl-dot"></div><div class="tl-line"></div></div><div class="tl-content"><div class="tl-phase">Months 4–9: Implementation</div><div class="tl-desc">Unified inventory model deployed; returns processing redesigned from 14 days to 3</div></div></div>
+          </div>
+        </div>
+        <div class="detail-block"><h4>The outcome</h4><p>Fulfilment cost per order reduced from £28 to £15.7. Delivery speed improved by 1.2 days on average. Returns-to-restock cycle cut from 14 days to 3 days, recovering an estimated £4.2M in lost sales annually.</p></div>
+      </div>
+    </div>
+
+    <!-- MANUFACTURING -->
+    <div class="full-case" data-industry="manufacturing">
+      <div class="full-case-header">
+        <div class="case-badge">🏭</div>
+        <div class="case-meta">
+          <div class="case-ind-full">Industrial manufacturing — Heavy equipment · 15-month engagement</div>
+          <h3>Lean transformation &amp; OEE improvement program</h3>
+          <div class="case-tag-row"><span class="svc-tag tag-green" style="margin:0">Operations</span></div>
+        </div>
+      </div>
+      <div class="full-case-stats">
+        <div class="case-stat"><div class="case-stat-val" style="color:#2e7d52">+19pt</div><div class="case-stat-lbl">OEE gain</div></div>
+        <div class="case-stat"><div class="case-stat-val" style="color:#c8522a">−28%</div><div class="case-stat-lbl">Unit cost</div></div>
+        <div class="case-stat"><div class="case-stat-val" style="color:#1a3a5c">+23%</div><div class="case-stat-lbl">Throughput</div></div>
+      </div>
+      <div class="full-case-body">
+        <p>A heavy equipment manufacturer was running at 54% OEE — 26 points below best-in-class. Unplanned downtime was the single biggest constraint on capacity, costing an estimated €22M per year in lost production and expediting costs.</p>
+        <button class="expand-toggle" onclick="toggleExpand(this)">Read full case study ↓</button>
+      </div>
+      <div class="case-expanded">
+        <div class="detail-block"><h4>The challenge</h4><p>54% OEE. Top 3 downtime causes responsible for 68% of total lost time. No structured maintenance program. Shop floor KPIs not cascaded below plant manager level.</p></div>
+        <div class="detail-block"><h4>Our approach</h4>
+          <div class="timeline">
+            <div class="tl-item"><div><div class="tl-dot"></div><div class="tl-line"></div></div><div class="tl-content"><div class="tl-phase">Months 1–4: Loss analysis &amp; prioritisation</div><div class="tl-desc">Granular OEE measurement deployed; Pareto of losses built; quick-win roadmap defined</div></div></div>
+            <div class="tl-item"><div><div class="tl-dot"></div><div class="tl-line"></div></div><div class="tl-content"><div class="tl-phase">Months 5–15: Lean implementation</div><div class="tl-desc">5S, SMED, TPM programs run in parallel; daily management system embedded across all lines</div></div></div>
+          </div>
+        </div>
+        <div class="detail-block"><h4>The outcome</h4><p>OEE improved from 54% to 73% — a 19-point gain. Unit manufacturing cost reduced by 28%. Throughput increased 23% without capital investment. The improvements generated €19M in annualised value, returning 8x the engagement fee in year one.</p></div>
+      </div>
+    </div>
+
+    <!-- ENERGY -->
+    <div class="full-case" data-industry="manufacturing">
+      <div class="full-case-header">
+        <div class="case-badge">⚡</div>
+        <div class="case-meta">
+          <div class="case-ind-full">Energy — Renewable developer · 10-month engagement</div>
+          <h3>Procurement transformation &amp; supplier consolidation</h3>
+          <div class="case-tag-row"><span class="svc-tag tag-orange" style="margin:0">Strategy</span><span class="svc-tag tag-green" style="margin:0">ESG</span></div>
+        </div>
+      </div>
+      <div class="full-case-stats">
+        <div class="case-stat"><div class="case-stat-val" style="color:#c8522a">−22%</div><div class="case-stat-lbl">Procurement cost</div></div>
+        <div class="case-stat"><div class="case-stat-val" style="color:#2e7d52">60%</div><div class="case-stat-lbl">Fewer suppliers</div></div>
+        <div class="case-stat"><div class="case-stat-val" style="color:#1a3a5c">SBT</div><div class="case-stat-lbl">Targets achieved</div></div>
+      </div>
+      <div class="full-case-body">
+        <p>A fast-growing renewable energy developer had a fragmented supplier base of 340+ vendors accumulated through rapid project expansion. Procurement was decentralised, leading to inconsistent pricing, poor sustainability compliance, and significant administrative overhead.</p>
+        <button class="expand-toggle" onclick="toggleExpand(this)">Read full case study ↓</button>
+      </div>
+      <div class="case-expanded">
+        <div class="detail-block"><h4>The outcome</h4><p>Supplier base reduced from 340 to 138 strategic partners. Centralised procurement function established. Category spend under management increased from 34% to 91%. Average unit costs reduced 22% through aggregated volume leverage. All tier-1 suppliers now meet science-based sustainability criteria.</p></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="cta-section">
+  <div>
+    <div class="eyebrow" style="color:rgba(200,82,42,0.7)">Work with us</div>
+    <h2>Your results story starts with a diagnostic.</h2>
+    <p style="color:rgba(255,255,255,0.45);font-size:0.9rem;margin-top:1rem;line-height:1.6">Every engagement above started with our free 45-minute diagnostic call.</p>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:1rem;align-items:flex-start">
+    <a href="diagnostics.html" class="btn-white">Run the free diagnostic →</a>
+    <a href="../index.html#cta" class="btn-ghost" style="color:rgba(255,255,255,0.6);border-color:rgba(255,255,255,0.2)">Schedule a call instead</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand"><a href="../index.html" class="footer-logo">VEXA<span>.</span>CHAIN</a><p class="footer-tagline">Data-driven operations &amp; supply chain consulting.</p></div>
+    <div class="footer-cols">
+      <div class="footer-col"><h4>Services</h4><a href="services.html">All Services</a><a href="diagnostics.html">Diagnostics</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="case-studies.html">Case Studies</a><a href="platform.html">Platform</a></div>
+      <div class="footer-col"><h4>Client</h4><a href="dashboard.html">Dashboard Login</a></div>
+    </div>
+  </div>
+  <div class="footer-bottom"><span class="footer-copy">© 2026 VexaChain Consulting.</span><div class="footer-legal"><a href="#">Privacy</a><a href="#">Terms</a></div></div>
+</footer>
+
+<script src="../script.js"></script>
+<script>
+  function toggleExpand(btn) {
+    const expanded = btn.closest('.full-case-body').nextElementSibling;
+    if (expanded.classList.contains('open')) {
+      expanded.classList.remove('open');
+      btn.textContent = 'Read full case study ↓';
+    } else {
+      expanded.classList.add('open');
+      btn.textContent = 'Close ↑';
+    }
+  }
+  function filterCases(industry, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.full-case').forEach(c => {
+      if (industry === 'all' || c.dataset.industry === industry) {
+        c.style.display = '';
+      } else {
+        c.style.display = 'none';
+      }
+    });
+  }
+  // Anchor scroll
+  const hash = window.location.hash;
+  if (hash) {
+    setTimeout(() => {
+      const el = document.querySelector(hash);
+      if (el) { el.scrollIntoView({ behavior: 'smooth' }); el.querySelector('.expand-toggle')?.click(); }
+    }, 300);
+  }
+</script>
+</body>
+</html>

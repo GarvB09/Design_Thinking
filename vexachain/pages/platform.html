@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Data Platform — VexaChain Consulting</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../style.css"/>
+  <style>
+    .platform-section{padding:4rem 3.5rem}
+    .platform-section:nth-child(even){background:var(--paper2)}
+    .platform-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+    .platform-grid.flip{direction:rtl}
+    .platform-grid.flip>*{direction:ltr}
+    .feature-list{display:flex;flex-direction:column;gap:0.75rem;margin-top:1.5rem}
+    .feature-item{display:flex;align-items:flex-start;gap:0.75rem;padding:0.75rem;background:var(--paper);border-radius:4px;border:1px solid var(--paper3)}
+    .feature-icon{font-size:1.2rem;flex-shrink:0;margin-top:1px}
+    .feature-text h4{font-size:0.85rem;font-weight:500;color:var(--ink);margin-bottom:2px}
+    .feature-text p{font-size:0.78rem;color:var(--ink3);line-height:1.5}
+    .mock-screen{background:var(--accent2);border-radius:8px;padding:1.5rem;position:relative;overflow:hidden}
+    .mock-screen::before{content:'';position:absolute;top:-40px;right:-40px;width:180px;height:180px;border:1px solid rgba(255,255,255,0.07);border-radius:50%}
+    .mock-titlebar{display:flex;align-items:center;gap:6px;margin-bottom:1rem}
+    .mock-dot{width:8px;height:8px;border-radius:50%}
+    .mock-title-text{font-family:'Syne',sans-serif;font-size:0.7rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-left:6px}
+    .mock-card{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:4px;padding:1rem;margin-bottom:0.75rem}
+    .mock-card-title{font-size:0.65rem;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.5rem}
+    .mock-val{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;color:#fff}
+    .mock-delta{font-size:0.68rem;color:#4ade80;margin-top:2px}
+    .mock-row{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem}
+    .mock-alert{background:rgba(200,82,42,0.2);border:1px solid rgba(200,82,42,0.4);border-radius:4px;padding:0.75rem;display:flex;gap:0.5rem;align-items:flex-start}
+    .alert-dot{width:8px;height:8px;border-radius:50%;background:#c8522a;margin-top:3px;flex-shrink:0;animation:pulse 2s infinite}
+    .alert-text{font-size:0.75rem;color:rgba(255,255,255,0.8);line-height:1.4}
+    .mock-bar-row{display:flex;align-items:center;gap:0.75rem;padding:0.5rem 0;border-bottom:1px solid rgba(255,255,255,0.07)}
+    .mock-bar-row:last-child{border-bottom:none}
+    .mock-bar-lbl{font-size:0.7rem;color:rgba(255,255,255,0.6);width:100px;flex-shrink:0}
+    .mock-bar-track{flex:1;height:6px;background:rgba(255,255,255,0.1);border-radius:3px}
+    .mock-bar-fill{height:100%;border-radius:3px}
+    .mock-bar-val{font-family:'Syne',sans-serif;font-size:0.7rem;font-weight:700;color:#fff;min-width:28px;text-align:right}
+    .integration-logos{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2rem}
+    .integration-logo{background:var(--paper);border:1px solid var(--paper3);border-radius:4px;padding:1rem;text-align:center;font-size:0.75rem;font-weight:500;color:var(--ink2)}
+    .integration-logo .il-icon{font-size:1.5rem;display:block;margin-bottom:0.4rem}
+    .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2.5rem}
+    .pricing-card{background:var(--paper);border:1px solid var(--paper3);border-radius:6px;padding:2rem;position:relative}
+    .pricing-card.featured{border-color:var(--accent2);background:var(--accent2);color:#fff}
+    .pricing-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;font-family:'Syne',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:4px 12px;border-radius:12px;white-space:nowrap}
+    .price{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;margin:0.75rem 0 0.25rem}
+    .price-note{font-size:0.75rem;opacity:0.6;margin-bottom:1.5rem}
+    .price-features{list-style:none;display:flex;flex-direction:column;gap:0.5rem;margin-bottom:1.5rem}
+    .price-features li{font-size:0.82rem;display:flex;align-items:center;gap:0.5rem;opacity:0.8}
+    .price-features li::before{content:'✓';font-weight:700;color:#4ade80;flex-shrink:0}
+    @media(max-width:1024px){.platform-grid{grid-template-columns:1fr}.platform-grid.flip{direction:ltr}.pricing-grid{grid-template-columns:1fr}.integration-logos{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:768px){.platform-section{padding:2.5rem 1.5rem}}
+  </style>
+</head>
+<body>
+<nav>
+  <a href="../index.html" class="logo">VEXA<span>.</span>CHAIN</a>
+  <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">☰</button>
+  <ul id="nav-menu">
+    <li><a href="services.html">Services</a></li>
+    <li><a href="diagnostics.html">Diagnostics</a></li>
+    <li><a href="case-studies.html">Case Studies</a></li>
+    <li><a href="platform.html" style="color:var(--accent)">Data Platform</a></li>
+    <li><a href="dashboard.html" class="nav-cta">Client Login</a></li>
+  </ul>
+</nav>
+<div class="breadcrumb"><a href="../index.html">Home</a><span>›</span> Data Platform</div>
+
+<div class="page-hero">
+  <div class="eyebrow">VexaChain Platform</div>
+  <h1>The operational brain behind every engagement.</h1>
+  <p>Proprietary software that connects your data sources, detects anomalies in real time, and surfaces ranked action recommendations — so your team acts faster and smarter.</p>
+</div>
+
+<!-- REAL-TIME VISIBILITY -->
+<div class="platform-section">
+  <div class="platform-grid">
+    <div>
+      <div class="section-tag">Module 1</div>
+      <h2 class="section-h">Real-time control tower</h2>
+      <p class="section-p">A single pane of glass across your entire supply chain — from supplier capacity to last-mile delivery status.</p>
+      <div class="feature-list">
+        <div class="feature-item"><div class="feature-icon">📡</div><div class="feature-text"><h4>Live supplier feed</h4><p>Capacity, lead time, and quality signals updated continuously from 100+ ERP and portal integrations</p></div></div>
+        <div class="feature-item"><div class="feature-icon">🚨</div><div class="feature-text"><h4>Automated risk alerts</h4><p>ML flags anomalies 2–4 weeks before they impact your operations — with recommended mitigations</p></div></div>
+        <div class="feature-item"><div class="feature-icon">🗺️</div><div class="feature-text"><h4>Network visualisation</h4><p>Interactive map of your full supply chain with live status on every node and lane</p></div></div>
+      </div>
+    </div>
+    <div class="mock-screen">
+      <div class="mock-titlebar"><div class="mock-dot" style="background:#ff5f57"></div><div class="mock-dot" style="background:#ffbd2e"></div><div class="mock-dot" style="background:#28c840"></div><span class="mock-title-text">Control Tower — Live</span></div>
+      <div class="mock-row">
+        <div class="mock-card"><div class="mock-card-title">On-Time Delivery</div><div class="mock-val">94.2%</div><div class="mock-delta">↑ +3.1% this week</div></div>
+        <div class="mock-card"><div class="mock-card-title">Supplier Risk</div><div class="mock-val">Low</div><div class="mock-delta" style="color:#4ade80">0.12 index</div></div>
+      </div>
+      <div class="mock-alert"><div class="alert-dot"></div><div class="alert-text"><strong style="color:#fff">Risk alert:</strong> Supplier CN-047 capacity constraint detected. Recommend alternative sourcing from EU-112 by Week 18. Potential 3-day delay on SKU-group B.</div></div>
+      <div class="mock-card" style="margin-top:0.75rem;margin-bottom:0">
+        <div class="mock-card-title">Supply health by region</div>
+        <div class="mock-bar-row"><div class="mock-bar-lbl">Europe</div><div class="mock-bar-track"><div class="mock-bar-fill" style="width:91%;background:#4ade80"></div></div><div class="mock-bar-val">91</div></div>
+        <div class="mock-bar-row"><div class="mock-bar-lbl">Asia Pacific</div><div class="mock-bar-track"><div class="mock-bar-fill" style="width:74%;background:#facc15"></div></div><div class="mock-bar-val">74</div></div>
+        <div class="mock-bar-row"><div class="mock-bar-lbl">Americas</div><div class="mock-bar-track"><div class="mock-bar-fill" style="width:88%;background:#4ade80"></div></div><div class="mock-bar-val">88</div></div>
+        <div class="mock-bar-row"><div class="mock-bar-lbl">Middle East</div><div class="mock-bar-track"><div class="mock-bar-fill" style="width:62%;background:#c8522a"></div></div><div class="mock-bar-val">62</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SCENARIO MODELING -->
+<div class="platform-section">
+  <div class="platform-grid flip">
+    <div>
+      <div class="section-tag">Module 2</div>
+      <h2 class="section-h">Scenario modeling &amp; simulation</h2>
+      <p class="section-p">Before you commit to a sourcing change, network redesign, or capacity decision — model the impact in minutes, not weeks.</p>
+      <div class="feature-list">
+        <div class="feature-item"><div class="feature-icon">🔀</div><div class="feature-text"><h4>What-if analysis</h4><p>Change any variable — demand, lead time, cost, supplier — and see the downstream ripple effect instantly</p></div></div>
+        <div class="feature-item"><div class="feature-icon">📈</div><div class="feature-text"><h4>Demand scenario planning</h4><p>Model best/base/worst case demand and stress-test your inventory and capacity against each</p></div></div>
+        <div class="feature-item"><div class="feature-icon">💡</div><div class="feature-text"><h4>Ranked recommendations</h4><p>Each scenario outputs an action ranking by projected impact, implementation effort, and confidence score</p></div></div>
+      </div>
+    </div>
+    <div class="mock-screen">
+      <div class="mock-titlebar"><div class="mock-dot" style="background:#ff5f57"></div><div class="mock-dot" style="background:#ffbd2e"></div><div class="mock-dot" style="background:#28c840"></div><span class="mock-title-text">Scenario Modeler</span></div>
+      <div class="mock-card"><div class="mock-card-title">Active scenario: +20% demand spike Q3</div>
+        <div style="display:flex;gap:0.5rem;margin-top:0.5rem;flex-wrap:wrap">
+          <span style="background:rgba(200,82,42,0.3);color:#ffb8a0;font-size:0.65rem;padding:3px 8px;border-radius:2px;font-weight:600">INVENTORY GAP: −340 units</span>
+          <span style="background:rgba(74,222,128,0.2);color:#4ade80;font-size:0.65rem;padding:3px 8px;border-radius:2px;font-weight:600">CAPACITY: SUFFICIENT</span>
+        </div>
+      </div>
+      <div class="mock-card"><div class="mock-card-title">Recommended actions</div>
+        <div class="mock-bar-row"><div class="mock-bar-lbl">Expedite PO-2841</div><div class="mock-bar-track"><div class="mock-bar-fill" style="width:88%;background:#4ade80"></div></div><div class="mock-bar-val" style="font-size:0.62rem;color:rgba(255,255,255,0.5)">+88 impact</div></div>
+        <div class="mock-bar-row"><div class="mock-bar-lbl">Use EU-112 buffer</div><div class="mock-bar-track"><div class="mock-bar-fill" style="width:72%;background:#facc15"></div></div><div class="mock-bar-val" style="font-size:0.62rem;color:rgba(255,255,255,0.5)">+72 impact</div></div>
+        <div class="mock-bar-row"><div class="mock-bar-lbl">Shift safety stock</div><div class="mock-bar-track"><div class="mock-bar-fill" style="width:55%;background:#c8522a"></div></div><div class="mock-bar-val" style="font-size:0.62rem;color:rgba(255,255,255,0.5)">+55 impact</div></div>
+      </div>
+      <div class="mock-row">
+        <div class="mock-card" style="margin-bottom:0"><div class="mock-card-title">Est. cost impact</div><div class="mock-val" style="font-size:1rem;color:#c8522a">+$142K</div></div>
+        <div class="mock-card" style="margin-bottom:0"><div class="mock-card-title">Service impact</div><div class="mock-val" style="font-size:1rem;color:#4ade80">Neutral</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- INTEGRATIONS -->
+<div class="platform-section">
+  <div class="section-tag">Integrations</div>
+  <h2 class="section-h">Works with your existing stack</h2>
+  <p class="section-p">Native connectors for the most common ERP, WMS, TMS, and data platforms. Custom integrations built within the engagement.</p>
+  <div class="integration-logos">
+    <div class="integration-logo"><span class="il-icon">🔵</span>SAP S/4HANA</div>
+    <div class="integration-logo"><span class="il-icon">🟠</span>Oracle SCM</div>
+    <div class="integration-logo"><span class="il-icon">🔷</span>Microsoft D365</div>
+    <div class="integration-logo"><span class="il-icon">🟢</span>Salesforce</div>
+    <div class="integration-logo"><span class="il-icon">🟡</span>Kinaxis</div>
+    <div class="integration-logo"><span class="il-icon">⚫</span>Blue Yonder</div>
+    <div class="integration-logo"><span class="il-icon">🔴</span>Manhattan WMS</div>
+    <div class="integration-logo"><span class="il-icon">🟣</span>Custom API</div>
+  </div>
+</div>
+
+<!-- PRICING -->
+<div class="platform-section" style="background:var(--paper3)">
+  <div class="section-tag">Access</div>
+  <h2 class="section-h">Platform access for every stage</h2>
+  <p class="section-p">Platform access is included in all VexaChain engagements. Standalone licensing available for ongoing clients.</p>
+  <div class="pricing-grid">
+    <div class="pricing-card">
+      <span class="svc-tag tag-orange" style="margin-bottom:0.5rem">Engagement</span>
+      <div class="price">Included</div>
+      <div class="price-note">With any active consulting engagement</div>
+      <ul class="price-features">
+        <li>Full control tower access</li>
+        <li>Scenario modeling suite</li>
+        <li>Up to 50 supplier integrations</li>
+        <li>Dedicated success manager</li>
+        <li>Custom dashboards</li>
+      </ul>
+      <a href="../index.html#cta" class="btn-primary" style="width:100%;text-align:center">Start an engagement →</a>
+    </div>
+    <div class="pricing-card featured">
+      <span class="pricing-badge">Most popular</span>
+      <span class="svc-tag" style="background:rgba(255,255,255,0.15);color:#fff;margin-bottom:0.5rem">Ongoing license</span>
+      <div class="price">Custom</div>
+      <div class="price-note">Based on data volume and users</div>
+      <ul class="price-features">
+        <li>Full platform access post-engagement</li>
+        <li>Unlimited supplier integrations</li>
+        <li>Quarterly review with VexaChain team</li>
+        <li>Model updates &amp; retraining</li>
+        <li>Priority support</li>
+      </ul>
+      <a href="../index.html#cta" class="btn-white" style="width:100%;text-align:center">Request pricing →</a>
+    </div>
+    <div class="pricing-card">
+      <span class="svc-tag tag-green" style="margin-bottom:0.5rem">Diagnostic</span>
+      <div class="price">Free</div>
+      <div class="price-note">No commitment required</div>
+      <ul class="price-features">
+        <li>10-minute online assessment</li>
+        <li>Instant health score across 6 pillars</li>
+        <li>Personalised recommendations</li>
+        <li>No account required</li>
+      </ul>
+      <a href="diagnostics.html" class="btn-primary" style="width:100%;text-align:center">Run diagnostic →</a>
+    </div>
+  </div>
+</div>
+
+<div class="cta-section">
+  <div>
+    <div class="eyebrow" style="color:rgba(200,82,42,0.7)">See it live</div>
+    <h2>Want a platform demo?</h2>
+    <p style="color:rgba(255,255,255,0.45);font-size:0.9rem;margin-top:1rem;line-height:1.6">We'll walk you through the control tower, scenario modeler, and how we'd configure it for your operations.</p>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:1rem;align-items:flex-start">
+    <a href="dashboard.html" class="btn-white">View demo dashboard →</a>
+    <a href="../index.html#cta" class="btn-ghost" style="color:rgba(255,255,255,0.6);border-color:rgba(255,255,255,0.2)">Request a live demo</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand"><a href="../index.html" class="footer-logo">VEXA<span>.</span>CHAIN</a><p class="footer-tagline">Data-driven operations &amp; supply chain consulting.</p></div>
+    <div class="footer-cols">
+      <div class="footer-col"><h4>Platform</h4><a href="#control-tower">Control Tower</a><a href="#scenario">Scenario Modeling</a><a href="dashboard.html">Dashboard Demo</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="services.html">Services</a><a href="case-studies.html">Case Studies</a><a href="diagnostics.html">Diagnostics</a></div>
+      <div class="footer-col"><h4>Client</h4><a href="dashboard.html">Dashboard Login</a></div>
+    </div>
+  </div>
+  <div class="footer-bottom"><span class="footer-copy">© 2026 VexaChain Consulting.</span><div class="footer-legal"><a href="#">Privacy</a><a href="#">Terms</a></div></div>
+</footer>
+<script src="../script.js"></script>
+</body>
+</html>

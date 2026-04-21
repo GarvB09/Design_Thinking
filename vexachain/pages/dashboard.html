@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Client Dashboard — VexaChain</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../style.css"/>
+  <style>
+    body{background:var(--paper)}
+    /* LOGIN */
+    #login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--accent2);padding:2rem}
+    .login-card{background:var(--paper);border-radius:8px;padding:3rem;width:100%;max-width:420px;box-shadow:0 24px 64px rgba(0,0,0,0.3)}
+    .login-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.4rem;color:var(--ink);margin-bottom:0.25rem;display:block}
+    .login-logo span{color:var(--accent)}
+    .login-sub{font-size:0.8rem;color:var(--ink3);margin-bottom:2rem}
+    .login-form{display:flex;flex-direction:column;gap:0.75rem}
+    .login-label{font-family:'Syne',sans-serif;font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink2);margin-bottom:3px;display:block}
+    .login-input{width:100%;background:var(--paper2);border:1px solid var(--paper3);border-radius:3px;padding:0.75rem 1rem;font-size:0.9rem;color:var(--ink);font-family:'DM Sans',sans-serif;outline:none;transition:border-color 0.2s}
+    .login-input:focus{border-color:var(--accent2)}
+    .login-hint{font-size:0.72rem;color:var(--ink3);margin-top:0.25rem;font-style:italic}
+    .login-btn{width:100%;margin-top:0.5rem;font-size:0.85rem;text-align:center;cursor:pointer;font-family:'Syne',sans-serif}
+    .login-error{background:#fef2e8;border:1px solid #f8c4a0;border-radius:3px;padding:0.65rem 1rem;font-size:0.8rem;color:#c8522a;display:none}
+    /* DASHBOARD */
+    #dashboard-screen{display:none}
+    .dash-nav{display:flex;align-items:center;justify-content:space-between;padding:1rem 2rem;background:var(--accent2);color:#fff;position:sticky;top:0;z-index:100}
+    .dash-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:#fff}
+    .dash-logo span{color:rgba(200,82,42,0.9)}
+    .dash-client{font-size:0.78rem;color:rgba(255,255,255,0.5)}
+    .dash-actions{display:flex;gap:0.75rem;align-items:center}
+    .dash-btn{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:#fff;padding:0.4rem 0.9rem;border-radius:2px;font-size:0.75rem;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background 0.15s}
+    .dash-btn:hover{background:rgba(255,255,255,0.2)}
+    .dash-body{padding:2rem;display:flex;flex-direction:column;gap:1.5rem}
+    /* KPI Strip */
+    .kpi-strip{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem}
+    .kpi-card{background:#fff;border:1px solid var(--paper3);border-radius:6px;padding:1.25rem}
+    .kpi-card-lbl{font-family:'Syne',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:0.4rem}
+    .kpi-card-val{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:var(--ink);line-height:1}
+    .kpi-card-delta{font-size:0.72rem;margin-top:4px}
+    .delta-up{color:#2e7d52}
+    .delta-down{color:#c8522a}
+    /* Charts row */
+    .charts-row{display:grid;grid-template-columns:2fr 1fr;gap:1rem}
+    .chart-card{background:#fff;border:1px solid var(--paper3);border-radius:6px;padding:1.25rem}
+    .chart-card-title{font-family:'Syne',sans-serif;font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:1rem}
+    /* Alerts */
+    .alerts-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+    .alert-card{background:#fff;border:1px solid var(--paper3);border-radius:6px;padding:1.25rem}
+    .alert-item{display:flex;gap:0.75rem;align-items:flex-start;padding:0.65rem 0;border-bottom:1px solid var(--paper3)}
+    .alert-item:last-child{border-bottom:none}
+    .alert-sev{width:8px;height:8px;border-radius:50%;margin-top:5px;flex-shrink:0}
+    .sev-high{background:#c8522a;animation:pulse 2s infinite}
+    .sev-med{background:#b8922a}
+    .sev-low{background:#2e7d52}
+    .alert-content h5{font-size:0.82rem;font-weight:500;color:var(--ink);margin-bottom:2px}
+    .alert-content p{font-size:0.72rem;color:var(--ink3);line-height:1.4}
+    /* Supplier table */
+    .supplier-table{width:100%;border-collapse:collapse;font-size:0.8rem}
+    .supplier-table th{font-family:'Syne',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3);padding:0.5rem 0.75rem;text-align:left;border-bottom:1px solid var(--paper3);background:var(--paper2)}
+    .supplier-table td{padding:0.6rem 0.75rem;border-bottom:1px solid var(--paper3);color:var(--ink2)}
+    .supplier-table tr:last-child td{border-bottom:none}
+    .supplier-table tr:hover td{background:var(--paper2)}
+    .sup-status{display:inline-flex;align-items:center;gap:4px;font-size:0.68rem;font-weight:600;padding:2px 8px;border-radius:12px}
+    .sup-ok{background:#e8f5ef;color:#2e7d52}
+    .sup-warn{background:#fef9e8;color:#b8922a}
+    .sup-risk{background:#fef2e8;color:#c8522a}
+    @media(max-width:900px){.kpi-strip{grid-template-columns:repeat(2,1fr)}.charts-row{grid-template-columns:1fr}.alerts-row{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-card">
+    <span class="login-logo">VEXA<span>.</span>CHAIN</span>
+    <p class="login-sub">Client portal — secure access</p>
+    <div class="login-form">
+      <div><label class="login-label" for="l-email">Email address</label><input class="login-input" id="l-email" type="email" placeholder="you@company.com"/></div>
+      <div><label class="login-label" for="l-pass">Password</label><input class="login-input" id="l-pass" type="password" placeholder="••••••••"/><p class="login-hint">Demo: use any email + password "demo123"</p></div>
+      <div id="login-error" class="login-error">Incorrect credentials. Try password: demo123</div>
+      <button class="btn-primary login-btn" onclick="attemptLogin()">Sign in to dashboard →</button>
+      <a href="../index.html" style="text-align:center;font-size:0.78rem;color:var(--ink3);margin-top:0.5rem">← Back to main site</a>
+    </div>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard-screen">
+  <div class="dash-nav">
+    <div>
+      <div class="dash-logo">VEXA<span>.</span>CHAIN <span style="font-weight:400;font-size:0.8rem;opacity:0.5;margin-left:4px">Client Portal</span></div>
+      <div class="dash-client" id="dash-client-name">Acme Manufacturing — Operations Dashboard</div>
+    </div>
+    <div class="dash-actions">
+      <span class="live-dot" style="color:rgba(255,255,255,0.5);font-size:0.72rem">Live</span>
+      <button class="dash-btn" onclick="exportReport()">Export Report</button>
+      <button class="dash-btn" onclick="logout()">Sign out</button>
+    </div>
+  </div>
+
+  <div class="dash-body">
+    <!-- KPI Strip -->
+    <div class="kpi-strip">
+      <div class="kpi-card">
+        <div class="kpi-card-lbl">On-time delivery</div>
+        <div class="kpi-card-val">94.2%</div>
+        <div class="kpi-card-delta delta-up">↑ +6.1% vs Q1</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-card-lbl">Cost savings YTD</div>
+        <div class="kpi-card-val">$2.3M</div>
+        <div class="kpi-card-delta delta-up">↑ +18% vs target</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-card-lbl">Inventory turns</div>
+        <div class="kpi-card-val">12.4</div>
+        <div class="kpi-card-delta delta-up">↑ +2.1 vs baseline</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-card-lbl">Forecast accuracy</div>
+        <div class="kpi-card-val">91.7%</div>
+        <div class="kpi-card-delta delta-up">↑ +12pt since go-live</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-card-lbl">Supplier OTIF</div>
+        <div class="kpi-card-val">87.3%</div>
+        <div class="kpi-card-delta delta-down">↓ −2.1% this week</div>
+      </div>
+    </div>
+
+    <!-- Charts -->
+    <div class="charts-row">
+      <div class="chart-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">
+          <div class="chart-card-title" style="margin-bottom:0">Supply chain performance — 12 weeks</div>
+          <div class="chart-tabs"><span class="tab active" onclick="setDashTab(this,'otd')">OTIF</span><span class="tab" onclick="setDashTab(this,'inv')">Inventory</span><span class="tab" onclick="setDashTab(this,'cost')">Cost</span></div>
+        </div>
+        <div style="height:200px;position:relative"><canvas id="dashChart"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-card-title">Savings by category</div>
+        <div style="height:200px;position:relative"><canvas id="savingsChart"></canvas></div>
+      </div>
+    </div>
+
+    <!-- Alerts + Suppliers -->
+    <div class="alerts-row">
+      <div class="alert-card">
+        <div class="chart-card-title">Active alerts <span style="background:var(--accent);color:#fff;border-radius:10px;padding:1px 7px;font-size:0.62rem;margin-left:6px">3</span></div>
+        <div class="alert-item"><div class="alert-sev sev-high"></div><div class="alert-content"><h5>Supplier CN-047 capacity constraint</h5><p>Lead time risk on SKU Group B. Recommended action: activate EU-112 buffer. Impact by Week 18.</p></div></div>
+        <div class="alert-item"><div class="alert-sev sev-med"></div><div class="alert-content"><h5>Forecast deviation — Category 3</h5><p>+23% demand signal above plan for next 4 weeks. Safety stock review recommended by Thursday.</p></div></div>
+        <div class="alert-item"><div class="alert-sev sev-low"></div><div class="alert-content"><h5>Carrier rate renegotiation due</h5><p>Current contract expires in 47 days. Freight market rates down 8% — strong position to negotiate.</p></div></div>
+      </div>
+      <div class="alert-card">
+        <div class="chart-card-title">Supplier scorecard — top 8</div>
+        <table class="supplier-table">
+          <thead><tr><th>Supplier</th><th>OTIF</th><th>Quality</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Supplier EU-112</td><td>98.1%</td><td>99.4%</td><td><span class="sup-status sup-ok">● On track</span></td></tr>
+            <tr><td>Supplier DE-008</td><td>95.6%</td><td>98.1%</td><td><span class="sup-status sup-ok">● On track</span></td></tr>
+            <tr><td>Supplier CN-047</td><td>71.2%</td><td>96.3%</td><td><span class="sup-status sup-risk">● At risk</span></td></tr>
+            <tr><td>Supplier US-023</td><td>88.4%</td><td>97.8%</td><td><span class="sup-status sup-warn">● Watch</span></td></tr>
+            <tr><td>Supplier IN-015</td><td>92.0%</td><td>99.1%</td><td><span class="sup-status sup-ok">● On track</span></td></tr>
+            <tr><td>Supplier PL-031</td><td>94.7%</td><td>98.6%</td><td><span class="sup-status sup-ok">● On track</span></td></tr>
+            <tr><td>Supplier MX-019</td><td>83.1%</td><td>95.2%</td><td><span class="sup-status sup-warn">● Watch</span></td></tr>
+            <tr><td>Supplier JP-004</td><td>97.3%</td><td>99.8%</td><td><span class="sup-status sup-ok">● On track</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script src="../script.js"></script>
+<script>
+  function attemptLogin() {
+    const email = document.getElementById('l-email').value.trim();
+    const pass = document.getElementById('l-pass').value;
+    if (!email || pass !== 'demo123') {
+      document.getElementById('login-error').style.display = 'block';
+      return;
+    }
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('dashboard-screen').style.display = 'block';
+    document.getElementById('dash-client-name').textContent = email.split('@')[0].charAt(0).toUpperCase() + email.split('@')[0].slice(1) + ' — Operations Dashboard';
+    initCharts();
+  }
+
+  // Allow Enter key on password field
+  document.getElementById('l-pass')?.addEventListener('keydown', e => { if (e.key === 'Enter') attemptLogin(); });
+
+  function logout() {
+    document.getElementById('dashboard-screen').style.display = 'none';
+    document.getElementById('login-screen').style.display = 'flex';
+    document.getElementById('l-email').value = '';
+    document.getElementById('l-pass').value = '';
+  }
+
+  function exportReport() {
+    alert('Report export triggered! In a live system, this would generate a PDF summary of your current dashboard data.');
+  }
+
+  let dashChart, savChart;
+
+  const dashData = {
+    otd: { label: 'OTIF %', data: [82,84,85,87,87,89,90,91,92,93,94,94.2], color: '#1a3a5c', target: 95 },
+    inv: { label: 'Inventory turns', data: [8.1,8.4,8.9,9.2,9.8,10.1,10.6,11.0,11.4,11.8,12.1,12.4], color: '#2e7d52', target: 11 },
+    cost: { label: 'Monthly savings ($K)', data: [80,95,110,140,170,180,200,210,220,230,240,250], color: '#c8522a', target: 200 }
+  };
+
+  function initCharts() {
+    const labels = ['W1','W2','W3','W4','W5','W6','W7','W8','W9','W10','W11','W12'];
+    const d = dashData.otd;
+    dashChart = new Chart(document.getElementById('dashChart'), {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [
+          { label: d.label, data: d.data, borderColor: d.color, backgroundColor: d.color + '15', borderWidth: 2, tension: 0.4, pointRadius: 2, fill: true },
+          { label: 'Target', data: new Array(12).fill(d.target), borderColor: '#c8522a', borderDash: [5,4], borderWidth: 1, pointRadius: 0 }
+        ]
+      },
+      options: { responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{ x:{grid:{color:'rgba(0,0,0,0.04)'},ticks:{font:{size:10},color:'#888'}}, y:{grid:{color:'rgba(0,0,0,0.04)'},ticks:{font:{size:10},color:'#888'}} } }
+    });
+
+    savChart = new Chart(document.getElementById('savingsChart'), {
+      type: 'doughnut',
+      data: {
+        labels: ['Logistics','Inventory','Procurement','Operations'],
+        datasets: [{ data: [38,28,22,12], backgroundColor: ['#1a3a5c','#2e7d52','#c8522a','#b8922a'], borderWidth: 0, hoverOffset: 4 }]
+      },
+      options: { responsive:true, maintainAspectRatio:false, plugins:{ legend:{ position:'bottom', labels:{ font:{size:10}, padding:10 } } } }
+    });
+  }
+
+  window.setDashTab = function(el, key) {
+    document.querySelectorAll('.chart-tabs .tab').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+    if (!dashChart) return;
+    const d = dashData[key];
+    dashChart.data.datasets[0].data = d.data;
+    dashChart.data.datasets[0].label = d.label;
+    dashChart.data.datasets[0].borderColor = d.color;
+    dashChart.data.datasets[0].backgroundColor = d.color + '15';
+    dashChart.data.datasets[1].data = new Array(12).fill(d.target);
+    dashChart.update();
+  };
+</script>
+</body>
+</html>

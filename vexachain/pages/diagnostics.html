@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Diagnostics — VexaChain Consulting</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../style.css"/>
+  <style>
+    .diag-container{max-width:760px;margin:0 auto;padding:4rem 2rem}
+    .progress-bar-wrap{height:4px;background:var(--paper3);border-radius:2px;margin-bottom:2.5rem}
+    .progress-bar-fill{height:100%;background:var(--accent);border-radius:2px;transition:width 0.4s ease}
+    .step{display:none}
+    .step.active{display:block}
+    .step-label{font-family:'Syne',sans-serif;font-size:0.68rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);margin-bottom:0.5rem}
+    .step h2{font-size:1.7rem;font-weight:800;letter-spacing:-0.02em;margin-bottom:0.5rem;line-height:1.15}
+    .step .step-sub{font-size:0.9rem;color:var(--ink3);margin-bottom:2rem;line-height:1.6}
+    .options{display:flex;flex-direction:column;gap:0.75rem}
+    .option{background:var(--paper);border:2px solid var(--paper3);border-radius:6px;padding:1rem 1.25rem;cursor:pointer;transition:all 0.15s;display:flex;align-items:center;gap:1rem}
+    .option:hover{border-color:var(--accent2);background:var(--paper2)}
+    .option.selected{border-color:var(--accent);background:#fef2e8}
+    .option-score{font-family:'Syne',sans-serif;font-size:0.7rem;font-weight:700;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .option-text{font-size:0.88rem;color:var(--ink2);line-height:1.4}
+    .step-nav{display:flex;justify-content:space-between;align-items:center;margin-top:2rem}
+    .step-nav .step-count{font-size:0.8rem;color:var(--ink3)}
+    /* Results */
+    .results-header{text-align:center;margin-bottom:2.5rem}
+    .results-header h2{font-size:2rem;font-weight:800;letter-spacing:-0.02em;margin-bottom:0.5rem}
+    .overall-score{font-family:'Syne',sans-serif;font-size:4rem;font-weight:800;color:var(--accent);line-height:1}
+    .overall-label{font-size:0.85rem;color:var(--ink3);margin-top:0.25rem}
+    .score-tier{display:inline-block;padding:4px 12px;border-radius:12px;font-size:0.75rem;font-weight:700;margin-top:0.75rem;letter-spacing:0.04em;text-transform:uppercase}
+    .results-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:2rem}
+    .result-bar-item{background:var(--paper);border:1px solid var(--paper3);border-radius:6px;padding:1rem 1.25rem}
+    .result-bar-item .pillar-name{font-size:0.82rem;font-weight:500;color:var(--ink);margin-bottom:0.6rem;display:flex;justify-content:space-between}
+    .result-bar-item .pillar-name span{font-family:'Syne',sans-serif;font-weight:700}
+    .result-bar-wrap{height:8px;background:var(--paper3);border-radius:4px}
+    .result-bar-fill{height:100%;border-radius:4px;transition:width 0.8s ease}
+    .recommendation{background:var(--accent2);color:#fff;border-radius:6px;padding:1.5rem;margin-bottom:1rem}
+    .recommendation h4{font-family:'Syne',sans-serif;font-size:0.85rem;font-weight:700;margin-bottom:0.5rem}
+    .recommendation p{font-size:0.82rem;color:rgba(255,255,255,0.7);line-height:1.5}
+    .results-actions{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-top:2rem}
+    @media(max-width:640px){.results-grid{grid-template-columns:1fr}.step h2{font-size:1.4rem}}
+  </style>
+</head>
+<body>
+<nav>
+  <a href="../index.html" class="logo">VEXA<span>.</span>CHAIN</a>
+  <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">☰</button>
+  <ul id="nav-menu">
+    <li><a href="services.html">Services</a></li>
+    <li><a href="diagnostics.html" style="color:var(--accent)">Diagnostics</a></li>
+    <li><a href="case-studies.html">Case Studies</a></li>
+    <li><a href="platform.html">Data Platform</a></li>
+    <li><a href="dashboard.html" class="nav-cta">Client Login</a></li>
+  </ul>
+</nav>
+<div class="breadcrumb"><a href="../index.html">Home</a><span>›</span> Diagnostics</div>
+
+<div class="page-hero">
+  <div class="eyebrow">Free assessment</div>
+  <h1>How healthy is your supply chain?</h1>
+  <p>Answer 6 quick questions across our operational pillars. Get an instant score and personalised recommendations in under 5 minutes.</p>
+</div>
+
+<div class="diag-container">
+  <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progress" style="width:0%"></div></div>
+
+  <!-- Step 1: Demand Planning -->
+  <div class="step active" id="step-1">
+    <div class="step-label">Pillar 1 of 6 — Demand Planning</div>
+    <h2>How accurately does your team forecast customer demand?</h2>
+    <p class="step-sub">Think about your typical forecast accuracy at the SKU level over a 4-week horizon.</p>
+    <div class="options">
+      <div class="option" onclick="selectOption(this, 1, 10)"><div class="option-score" style="background:#e8f5ef;color:#2e7d52">4</div><div class="option-text">We use statistical models or ML — regularly achieving 85%+ accuracy</div></div>
+      <div class="option" onclick="selectOption(this, 1, 7)"><div class="option-score" style="background:#fef9e8;color:#b8922a">3</div><div class="option-text">We have a formal process but accuracy varies by category (60–85%)</div></div>
+      <div class="option" onclick="selectOption(this, 1, 4)"><div class="option-score" style="background:#fef2e8;color:#c8522a">2</div><div class="option-text">We rely mainly on sales team input and history — often surprised by variance</div></div>
+      <div class="option" onclick="selectOption(this, 1, 1)"><div class="option-score" style="background:#fce8e8;color:#b02020">1</div><div class="option-text">No formal forecasting — we react to orders as they arrive</div></div>
+    </div>
+    <div class="step-nav"><div></div><div class="step-count">1 / 6</div><button class="btn-primary" onclick="nextStep(2)" id="next-1" disabled style="opacity:0.4">Next →</button></div>
+  </div>
+
+  <!-- Step 2: Supplier Management -->
+  <div class="step" id="step-2">
+    <div class="step-label">Pillar 2 of 6 — Supplier Management</div>
+    <h2>How well do you manage supplier performance and risk?</h2>
+    <p class="step-sub">Consider your visibility into supplier capacity, quality, and delivery performance.</p>
+    <div class="options">
+      <div class="option" onclick="selectOption(this, 2, 10)"><div class="option-score" style="background:#e8f5ef;color:#2e7d52">4</div><div class="option-text">Real-time supplier scorecards, risk monitoring, and dual-sourcing on critical parts</div></div>
+      <div class="option" onclick="selectOption(this, 2, 7)"><div class="option-score" style="background:#fef9e8;color:#b8922a">3</div><div class="option-text">Regular reviews with top suppliers but limited visibility on tier-2+</div></div>
+      <div class="option" onclick="selectOption(this, 2, 4)"><div class="option-score" style="background:#fef2e8;color:#c8522a">2</div><div class="option-text">Reactive — we find out about issues when deliveries are late or quality fails</div></div>
+      <div class="option" onclick="selectOption(this, 2, 1)"><div class="option-score" style="background:#fce8e8;color:#b02020">1</div><div class="option-text">Little to no structured supplier management in place</div></div>
+    </div>
+    <div class="step-nav"><button class="btn-ghost" onclick="prevStep(1)">← Back</button><div class="step-count">2 / 6</div><button class="btn-primary" onclick="nextStep(3)" id="next-2" disabled style="opacity:0.4">Next →</button></div>
+  </div>
+
+  <!-- Step 3: Inventory -->
+  <div class="step" id="step-3">
+    <div class="step-label">Pillar 3 of 6 — Inventory Control</div>
+    <h2>How well-calibrated is your inventory across the network?</h2>
+    <p class="step-sub">Think about your inventory turns, write-off rates, and working capital tied up in stock.</p>
+    <div class="options">
+      <div class="option" onclick="selectOption(this, 3, 10)"><div class="option-score" style="background:#e8f5ef;color:#2e7d52">4</div><div class="option-text">Dynamic safety stock optimisation — turns above industry benchmark, minimal excess</div></div>
+      <div class="option" onclick="selectOption(this, 3, 7)"><div class="option-score" style="background:#fef9e8;color:#b8922a">3</div><div class="option-text">Defined policies in place but some chronic overstock and stockouts persist</div></div>
+      <div class="option" onclick="selectOption(this, 3, 4)"><div class="option-score" style="background:#fef2e8;color:#c8522a">2</div><div class="option-text">Manual reviews, high safety stock "just in case", regular write-offs</div></div>
+      <div class="option" onclick="selectOption(this, 3, 1)"><div class="option-score" style="background:#fce8e8;color:#b02020">1</div><div class="option-text">No visibility — we don't know what's where or why</div></div>
+    </div>
+    <div class="step-nav"><button class="btn-ghost" onclick="prevStep(2)">← Back</button><div class="step-count">3 / 6</div><button class="btn-primary" onclick="nextStep(4)" id="next-3" disabled style="opacity:0.4">Next →</button></div>
+  </div>
+
+  <!-- Step 4: Logistics -->
+  <div class="step" id="step-4">
+    <div class="step-label">Pillar 4 of 6 — Logistics Efficiency</div>
+    <h2>How optimised is your outbound logistics and distribution?</h2>
+    <p class="step-sub">Consider your freight costs as a % of revenue, on-time delivery rate, and carrier utilisation.</p>
+    <div class="options">
+      <div class="option" onclick="selectOption(this, 4, 10)"><div class="option-score" style="background:#e8f5ef;color:#2e7d52">4</div><div class="option-text">Optimised network with dynamic routing, strong carrier KPIs, and 98%+ OTIF</div></div>
+      <div class="option" onclick="selectOption(this, 4, 7)"><div class="option-score" style="background:#fef9e8;color:#b8922a">3</div><div class="option-text">Good performance but freight costs and delivery windows have room to improve</div></div>
+      <div class="option" onclick="selectOption(this, 4, 4)"><div class="option-score" style="background:#fef2e8;color:#c8522a">2</div><div class="option-text">High freight costs, carrier issues, and delivery complaints from customers</div></div>
+      <div class="option" onclick="selectOption(this, 4, 1)"><div class="option-score" style="background:#fce8e8;color:#b02020">1</div><div class="option-text">No visibility into logistics costs or performance — managed ad hoc</div></div>
+    </div>
+    <div class="step-nav"><button class="btn-ghost" onclick="prevStep(3)">← Back</button><div class="step-count">4 / 6</div><button class="btn-primary" onclick="nextStep(5)" id="next-4" disabled style="opacity:0.4">Next →</button></div>
+  </div>
+
+  <!-- Step 5: Data Maturity -->
+  <div class="step" id="step-5">
+    <div class="step-label">Pillar 5 of 6 — Data Maturity</div>
+    <h2>How data-driven are your operational decisions?</h2>
+    <p class="step-sub">Think about the quality, accessibility, and use of data in your day-to-day operations decisions.</p>
+    <div class="options">
+      <div class="option" onclick="selectOption(this, 5, 10)"><div class="option-score" style="background:#e8f5ef;color:#2e7d52">4</div><div class="option-text">Live dashboards, automated alerts, and AI-assisted decision support across functions</div></div>
+      <div class="option" onclick="selectOption(this, 5, 7)"><div class="option-score" style="background:#fef9e8;color:#b8922a">3</div><div class="option-text">Regular reporting but lots of manual Excel work and data quality issues</div></div>
+      <div class="option" onclick="selectOption(this, 5, 4)"><div class="option-score" style="background:#fef2e8;color:#c8522a">2</div><div class="option-text">Siloed systems, inconsistent data, decisions based on experience over evidence</div></div>
+      <div class="option" onclick="selectOption(this, 5, 1)"><div class="option-score" style="background:#fce8e8;color:#b02020">1</div><div class="option-text">No consistent data infrastructure — we can't see what's happening in real time</div></div>
+    </div>
+    <div class="step-nav"><button class="btn-ghost" onclick="prevStep(4)">← Back</button><div class="step-count">5 / 6</div><button class="btn-primary" onclick="nextStep(6)" id="next-5" disabled style="opacity:0.4">Next →</button></div>
+  </div>
+
+  <!-- Step 6: Sustainability -->
+  <div class="step" id="step-6">
+    <div class="step-label">Pillar 6 of 6 — Sustainability</div>
+    <h2>How advanced is your supply chain sustainability program?</h2>
+    <p class="step-sub">Consider your emissions visibility, supplier sustainability standards, and ESG reporting maturity.</p>
+    <div class="options">
+      <div class="option" onclick="selectOption(this, 6, 10)"><div class="option-score" style="background:#e8f5ef;color:#2e7d52">4</div><div class="option-text">Science-based targets set, Scope 3 mapped, supplier ESG standards in contracts</div></div>
+      <div class="option" onclick="selectOption(this, 6, 7)"><div class="option-score" style="background:#fef9e8;color:#b8922a">3</div><div class="option-text">Scope 1&amp;2 tracked, some supplier questionnaires, sustainability KPIs in reports</div></div>
+      <div class="option" onclick="selectOption(this, 6, 4)"><div class="option-score" style="background:#fef2e8;color:#c8522a">2</div><div class="option-text">Early stage — we know it matters but haven't formalised our approach</div></div>
+      <div class="option" onclick="selectOption(this, 6, 1)"><div class="option-score" style="background:#fce8e8;color:#b02020">1</div><div class="option-text">No sustainability program in supply chain at all</div></div>
+    </div>
+    <div class="step-nav"><button class="btn-ghost" onclick="prevStep(5)">← Back</button><div class="step-count">6 / 6</div><button class="btn-primary" onclick="showResults()" id="next-6" disabled style="opacity:0.4">See Results →</button></div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="step" id="step-results">
+    <div class="results-header">
+      <div class="section-tag" style="justify-content:center">Your diagnostic results</div>
+      <div class="overall-score" id="result-score">0</div>
+      <div class="overall-label">Overall supply chain health score (out of 100)</div>
+      <div class="score-tier" id="score-tier">Calculating...</div>
+    </div>
+    <div class="results-grid" id="results-grid"></div>
+    <div id="recommendations"></div>
+    <div class="results-actions">
+      <a href="../index.html#cta" class="btn-primary">Book a free strategy call →</a>
+      <button class="btn-ghost" onclick="restartDiag()">Retake diagnostic</button>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand"><a href="../index.html" class="footer-logo">VEXA<span>.</span>CHAIN</a><p class="footer-tagline">Data-driven operations &amp; supply chain consulting.</p></div>
+    <div class="footer-cols">
+      <div class="footer-col"><h4>Services</h4><a href="services.html">All Services</a><a href="case-studies.html">Case Studies</a></div>
+      <div class="footer-col"><h4>Tools</h4><a href="diagnostics.html">Diagnostics</a><a href="platform.html">Data Platform</a></div>
+      <div class="footer-col"><h4>Client</h4><a href="dashboard.html">Dashboard Login</a></div>
+    </div>
+  </div>
+  <div class="footer-bottom"><span class="footer-copy">© 2026 VexaChain Consulting.</span><div class="footer-legal"><a href="#">Privacy</a><a href="#">Terms</a></div></div>
+</footer>
+
+<script src="../script.js"></script>
+<script>
+  const answers = {};
+  const pillars = ['Demand Planning','Supplier Management','Inventory Control','Logistics Efficiency','Data Maturity','Sustainability'];
+
+  function selectOption(el, step, score) {
+    el.closest('.options').querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+    el.classList.add('selected');
+    answers[step] = score;
+    const nextBtn = document.getElementById('next-' + step);
+    if (nextBtn) { nextBtn.disabled = false; nextBtn.style.opacity = '1'; }
+    // enable last step button
+    if (step === 6) { const b = document.getElementById('next-6'); b.disabled = false; b.style.opacity = '1'; }
+    updateProgress(step);
+  }
+
+  function updateProgress(step) {
+    const filled = Object.keys(answers).length;
+    document.getElementById('progress').style.width = ((filled / 6) * 100) + '%';
+  }
+
+  function nextStep(n) {
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    document.getElementById('step-' + n).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function prevStep(n) {
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    document.getElementById('step-' + n).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function showResults() {
+    const scores = [1,2,3,4,5,6].map(i => answers[i] || 0);
+    const total = Math.round(scores.reduce((a,b) => a+b, 0) / 60 * 100);
+
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    document.getElementById('step-results').classList.add('active');
+    document.getElementById('progress').style.width = '100%';
+
+    // Animate score
+    let cur = 0;
+    const scoreEl = document.getElementById('result-score');
+    const timer = setInterval(() => {
+      cur += 2;
+      if (cur >= total) { cur = total; clearInterval(timer); }
+      scoreEl.textContent = cur;
+    }, 20);
+
+    // Tier
+    const tierEl = document.getElementById('score-tier');
+    let tier, tierBg, tierColor;
+    if (total >= 80) { tier = 'High performer'; tierBg = '#e8f5ef'; tierColor = '#2e7d52'; }
+    else if (total >= 55) { tier = 'Developing'; tierBg = '#fef9e8'; tierColor = '#b8922a'; }
+    else if (total >= 30) { tier = 'At risk'; tierBg = '#fef2e8'; tierColor = '#c8522a'; }
+    else { tier = 'Critical gaps'; tierBg = '#fce8e8'; tierColor = '#b02020'; }
+    tierEl.textContent = tier;
+    tierEl.style.background = tierBg;
+    tierEl.style.color = tierColor;
+
+    // Bars
+    const grid = document.getElementById('results-grid');
+    grid.innerHTML = '';
+    scores.forEach((s, i) => {
+      const pct = Math.round(s / 10 * 100);
+      const col = pct >= 70 ? '#2e7d52' : pct >= 45 ? '#b8922a' : '#c8522a';
+      grid.innerHTML += `<div class="result-bar-item"><div class="pillar-name">${pillars[i]}<span>${pct}</span></div><div class="result-bar-wrap"><div class="result-bar-fill" style="width:0%;background:${col}" data-w="${pct}%"></div></div></div>`;
+    });
+    setTimeout(() => {
+      grid.querySelectorAll('.result-bar-fill').forEach(b => { b.style.width = b.dataset.w; });
+    }, 200);
+
+    // Recommendations
+    const recs = document.getElementById('recommendations');
+    recs.innerHTML = '<h3 style="font-family:Syne,sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:1rem">Top recommendations</h3>';
+    const weakPillars = scores.map((s,i)=>({s,i})).sort((a,b)=>a.s-b.s).slice(0,2);
+    const recTexts = [
+      { h: 'Upgrade your demand sensing', p: 'Implement a statistical forecasting layer on top of your ERP. A 4-week pilot with historical data typically surfaces 15–20% accuracy gains immediately.' },
+      { h: 'Build a supplier risk dashboard', p: 'Map your critical components to single-source suppliers and implement quarterly scorecards. Start with your top 20 by spend.' },
+      { h: 'Segment your inventory by velocity', p: 'Apply ABC/XYZ analysis and set differentiated safety stock policies. High-volume, predictable SKUs can carry 40% less stock safely.' },
+      { h: 'Consolidate your freight lanes', p: 'A 90-day carrier audit often reveals 12–18% savings through lane consolidation and spot rate elimination.' },
+      { h: 'Build a single operational KPI layer', p: 'Start with 8–10 leading indicators that cover demand, supply, inventory and delivery. Automate the refresh. Decisions improve within weeks.' },
+      { h: 'Start with a Scope 3 mapping exercise', p: 'Identify your top 10 suppliers by spend and request basic emissions data. This unlocks both cost reduction and reporting credibility.' }
+    ];
+    weakPillars.forEach(({i}) => {
+      recs.innerHTML += `<div class="recommendation"><h4>${recTexts[i].h}</h4><p>${recTexts[i].p}</p></div>`;
+    });
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function restartDiag() {
+    Object.keys(answers).forEach(k => delete answers[k]);
+    document.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+    document.querySelectorAll('[id^="next-"]').forEach(b => { b.disabled = true; b.style.opacity = '0.4'; });
+    document.getElementById('progress').style.width = '0%';
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    document.getElementById('step-1').classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>

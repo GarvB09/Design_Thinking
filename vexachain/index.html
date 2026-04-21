@@ -11,309 +11,144 @@
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
-  <div class="logo">VEXA<span>.</span>CHAIN</div>
-  <ul>
-    <li><a href="#">Services</a></li>
-    <li><a href="#">Diagnostics</a></li>
-    <li><a href="#">Case studies</a></li>
-    <li><a href="#">Data platform</a></li>
-    <li><a href="#" class="nav-cta">Client login</a></li>
+  <a href="index.html" class="logo">VEXA<span>.</span>CHAIN</a>
+  <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">☰</button>
+  <ul id="nav-menu">
+    <li><a href="pages/services.html">Services</a></li>
+    <li><a href="pages/diagnostics.html">Diagnostics</a></li>
+    <li><a href="pages/case-studies.html">Case Studies</a></li>
+    <li><a href="pages/platform.html">Data Platform</a></li>
+    <li><a href="pages/dashboard.html" class="nav-cta">Client Login</a></li>
   </ul>
 </nav>
 
-<!-- HERO -->
 <div class="hero">
   <div class="hero-left">
     <div class="eyebrow">Operations &amp; Supply Chain</div>
     <h1>Turn your supply chain into a <em>competitive edge</em></h1>
     <p class="hero-sub">We diagnose inefficiencies, redesign operations, and implement data-driven systems that compound performance gains quarter after quarter.</p>
     <div class="hero-actions">
-      <a href="#cta" class="btn-primary">Run a diagnostic →</a>
-      <a href="#cases" class="btn-ghost">View case studies</a>
+      <a href="pages/diagnostics.html" class="btn-primary">Run a Diagnostic →</a>
+      <a href="pages/case-studies.html" class="btn-ghost">View Case Studies</a>
     </div>
   </div>
   <div class="hero-right">
     <div class="dashboard-preview">
       <div class="dp-header">
-        <span class="dp-title">Client dashboard — live</span>
+        <span class="dp-title">Client Dashboard — Live</span>
         <span class="live-dot">Live</span>
       </div>
       <div class="kpi-row">
-        <div class="kpi">
-          <div class="kpi-val">94.2%</div>
-          <div class="kpi-lbl">On-time delivery</div>
-          <div class="kpi-delta">+6.1% vs prior quarter</div>
-        </div>
-        <div class="kpi">
-          <div class="kpi-val">$2.3M</div>
-          <div class="kpi-lbl">Cost savings YTD</div>
-          <div class="kpi-delta">+18% vs target</div>
-        </div>
-        <div class="kpi">
-          <div class="kpi-val">12.4</div>
-          <div class="kpi-lbl">Inventory turns</div>
-          <div class="kpi-delta">+2.1 vs baseline</div>
-        </div>
+        <div class="kpi"><div class="kpi-val">94.2%</div><div class="kpi-lbl">On-time delivery</div><div class="kpi-delta">+6.1% vs prior quarter</div></div>
+        <div class="kpi"><div class="kpi-val">$2.3M</div><div class="kpi-lbl">Cost savings YTD</div><div class="kpi-delta">+18% vs target</div></div>
+        <div class="kpi"><div class="kpi-val">12.4</div><div class="kpi-lbl">Inventory turns</div><div class="kpi-delta">+2.1 vs baseline</div></div>
       </div>
       <div class="mini-chart">
-        <div class="bar" style="height:35%"></div>
-        <div class="bar" style="height:50%"></div>
-        <div class="bar" style="height:42%"></div>
-        <div class="bar" style="height:65%"></div>
-        <div class="bar" style="height:58%"></div>
-        <div class="bar" style="height:72%"></div>
-        <div class="bar" style="height:68%"></div>
-        <div class="bar" style="height:80%"></div>
-        <div class="bar" style="height:75%"></div>
-        <div class="bar bar-accent" style="height:88%"></div>
-        <div class="bar bar-accent" style="height:92%"></div>
-        <div class="bar bar-accent" style="height:94%"></div>
+        <div class="bar" style="height:35%"></div><div class="bar" style="height:50%"></div><div class="bar" style="height:42%"></div>
+        <div class="bar" style="height:65%"></div><div class="bar" style="height:58%"></div><div class="bar" style="height:72%"></div>
+        <div class="bar" style="height:68%"></div><div class="bar" style="height:80%"></div><div class="bar" style="height:75%"></div>
+        <div class="bar bar-accent" style="height:88%"></div><div class="bar bar-accent" style="height:92%"></div><div class="bar bar-accent" style="height:94%"></div>
       </div>
       <div class="dp-row">
-        <div class="dp-card">
-          <div class="dp-card-title">Supplier risk index</div>
-          <div class="dp-metric">Low — 0.12</div>
-          <div class="dp-sub">23 suppliers monitored</div>
-        </div>
-        <div class="dp-card">
-          <div class="dp-card-title">Forecast accuracy</div>
-          <div class="dp-metric">91.7%</div>
-          <div class="dp-sub">Demand planning (90d)</div>
-        </div>
+        <div class="dp-card"><div class="dp-card-title">Supplier risk index</div><div class="dp-metric">Low — 0.12</div><div class="dp-sub">23 suppliers monitored</div></div>
+        <div class="dp-card"><div class="dp-card-title">Forecast accuracy</div><div class="dp-metric">91.7%</div><div class="dp-sub">Demand planning (90d)</div></div>
       </div>
+      <a href="pages/dashboard.html" class="dp-cta-btn">Open Full Dashboard →</a>
     </div>
   </div>
 </div>
 
-<!-- STATS BAND -->
 <div class="stats-band">
-  <div class="stat"><div class="stat-val">140+</div><div class="stat-lbl">Engagements completed</div></div>
-  <div class="stat"><div class="stat-val">$830M</div><div class="stat-lbl">Client savings generated</div></div>
-  <div class="stat"><div class="stat-val">22%</div><div class="stat-lbl">Average cost reduction</div></div>
-  <div class="stat"><div class="stat-val">96%</div><div class="stat-lbl">Client retention rate</div></div>
+  <div class="stat"><div class="stat-val counter" data-target="140" data-suffix="+">0</div><div class="stat-lbl">Engagements completed</div></div>
+  <div class="stat"><div class="stat-val counter" data-target="830" data-prefix="$" data-suffix="M">0</div><div class="stat-lbl">Client savings generated</div></div>
+  <div class="stat"><div class="stat-val counter" data-target="22" data-suffix="%">0</div><div class="stat-lbl">Average cost reduction</div></div>
+  <div class="stat"><div class="stat-val counter" data-target="96" data-suffix="%">0</div><div class="stat-lbl">Client retention rate</div></div>
 </div>
 
-<!-- SERVICES -->
 <section class="services" id="services">
   <div class="section-tag">What we do</div>
   <h2 class="section-h">End-to-end operations transformation</h2>
   <p class="section-p">From rapid diagnostics to multi-year performance programs — we meet you where the problem is.</p>
   <div class="services-grid">
-    <div class="svc">
-      <div class="svc-icon" style="background:#fef2e8">🔗</div>
-      <h3>Supply chain design</h3>
-      <p>Network modeling, supplier rationalization, and resilience engineering for complex global operations.</p>
-      <span class="svc-tag tag-orange">Strategy</span>
-    </div>
-    <div class="svc">
-      <div class="svc-icon" style="background:#e8f0f8">📊</div>
-      <h3>Demand &amp; inventory planning</h3>
-      <p>Statistical forecasting, S&OP redesign, and inventory optimization driven by real-time signals.</p>
-      <span class="svc-tag tag-blue">Analytics</span>
-    </div>
-    <div class="svc">
-      <div class="svc-icon" style="background:#e8f5ef">⚙️</div>
-      <h3>Operational excellence</h3>
-      <p>Lean transformation, process re-engineering, and sustainable productivity improvements at scale.</p>
-      <span class="svc-tag tag-green">Operations</span>
-    </div>
-    <div class="svc">
-      <div class="svc-icon" style="background:#fef2e8">🚚</div>
-      <h3>Logistics &amp; distribution</h3>
-      <p>Last-mile optimization, warehouse design, carrier strategy, and freight cost reduction programs.</p>
-      <span class="svc-tag tag-orange">Logistics</span>
-    </div>
-    <div class="svc">
-      <div class="svc-icon" style="background:#e8f0f8">🤖</div>
-      <h3>Digital &amp; automation</h3>
-      <p>AI-enabled decision platforms, ERP optimization, and control tower implementation for end-to-end visibility.</p>
-      <span class="svc-tag tag-blue">Technology</span>
-    </div>
-    <div class="svc">
-      <div class="svc-icon" style="background:#e8f5ef">🌿</div>
-      <h3>Sustainable operations</h3>
-      <p>Carbon footprint modeling, circular supply chain design, and ESG metrics integration across tiers.</p>
-      <span class="svc-tag tag-green">ESG</span>
-    </div>
+    <a href="pages/services.html#supply-chain" class="svc"><div class="svc-icon" style="background:#fef2e8">🔗</div><h3>Supply Chain Design</h3><p>Network modeling, supplier rationalization, and resilience engineering for complex global operations.</p><span class="svc-tag tag-orange">Strategy</span></a>
+    <a href="pages/services.html#demand" class="svc"><div class="svc-icon" style="background:#e8f0f8">📊</div><h3>Demand &amp; Inventory Planning</h3><p>Statistical forecasting, S&OP redesign, and inventory optimization driven by real-time signals.</p><span class="svc-tag tag-blue">Analytics</span></a>
+    <a href="pages/services.html#opex" class="svc"><div class="svc-icon" style="background:#e8f5ef">⚙️</div><h3>Operational Excellence</h3><p>Lean transformation, process re-engineering, and sustainable productivity improvements at scale.</p><span class="svc-tag tag-green">Operations</span></a>
+    <a href="pages/services.html#logistics" class="svc"><div class="svc-icon" style="background:#fef2e8">🚚</div><h3>Logistics &amp; Distribution</h3><p>Last-mile optimization, warehouse design, carrier strategy, and freight cost reduction programs.</p><span class="svc-tag tag-orange">Logistics</span></a>
+    <a href="pages/services.html#digital" class="svc"><div class="svc-icon" style="background:#e8f0f8">🤖</div><h3>Digital &amp; Automation</h3><p>AI-enabled decision platforms, ERP optimization, and control tower implementation for end-to-end visibility.</p><span class="svc-tag tag-blue">Technology</span></a>
+    <a href="pages/services.html#esg" class="svc"><div class="svc-icon" style="background:#e8f5ef">🌿</div><h3>Sustainable Operations</h3><p>Carbon footprint modeling, circular supply chain design, and ESG metrics integration across tiers.</p><span class="svc-tag tag-green">ESG</span></a>
   </div>
+  <div style="text-align:center;margin-top:2.5rem"><a href="pages/services.html" class="btn-ghost">Explore all services →</a></div>
 </section>
 
-<!-- DIAGNOSTICS -->
 <section class="diagnostics" id="diagnostics">
-  <div class="section-tag diag-tag">Diagnostic tool</div>
+  <div class="section-tag diag-tag">Diagnostic Tool</div>
   <h2 class="section-h" style="color:#fff;max-width:480px">Operational health at a glance</h2>
-  <p class="section-p" style="color:rgba(255,255,255,0.55)">Our proprietary diagnostic benchmarks your operations against 40+ performance dimensions across six pillars.</p>
+  <p class="section-p" style="color:rgba(255,255,255,0.55)">Our proprietary diagnostic benchmarks your operations across six pillars.</p>
   <div class="diag-grid">
     <div class="diag-panel">
-      <div class="diag-title">Sample client — baseline diagnostic</div>
-      <div class="diag-item">
-        <span class="diag-label">Demand planning</span>
-        <div class="diag-bar-wrap"><div class="diag-bar" style="width:64%;background:#c8522a"></div></div>
-        <span class="diag-score">64</span>
-      </div>
-      <div class="diag-item">
-        <span class="diag-label">Supplier management</span>
-        <div class="diag-bar-wrap"><div class="diag-bar" style="width:48%;background:#c8522a"></div></div>
-        <span class="diag-score">48</span>
-      </div>
-      <div class="diag-item">
-        <span class="diag-label">Inventory control</span>
-        <div class="diag-bar-wrap"><div class="diag-bar" style="width:55%;background:#4ade80"></div></div>
-        <span class="diag-score">55</span>
-      </div>
-      <div class="diag-item">
-        <span class="diag-label">Logistics efficiency</span>
-        <div class="diag-bar-wrap"><div class="diag-bar" style="width:72%;background:#4ade80"></div></div>
-        <span class="diag-score">72</span>
-      </div>
-      <div class="diag-item">
-        <span class="diag-label">Data maturity</span>
-        <div class="diag-bar-wrap"><div class="diag-bar" style="width:38%;background:#c8522a"></div></div>
-        <span class="diag-score">38</span>
-      </div>
-      <div class="diag-item">
-        <span class="diag-label">Sustainability</span>
-        <div class="diag-bar-wrap"><div class="diag-bar" style="width:29%;background:#c8522a"></div></div>
-        <span class="diag-score">29</span>
-      </div>
+      <div class="diag-title">Sample client — baseline</div>
+      <div class="diag-item"><span class="diag-label">Demand planning</span><div class="diag-bar-wrap"><div class="diag-bar anim-bar" data-width="64" style="background:#c8522a"></div></div><span class="diag-score">64</span></div>
+      <div class="diag-item"><span class="diag-label">Supplier management</span><div class="diag-bar-wrap"><div class="diag-bar anim-bar" data-width="48" style="background:#c8522a"></div></div><span class="diag-score">48</span></div>
+      <div class="diag-item"><span class="diag-label">Inventory control</span><div class="diag-bar-wrap"><div class="diag-bar anim-bar" data-width="55" style="background:#facc15"></div></div><span class="diag-score">55</span></div>
+      <div class="diag-item"><span class="diag-label">Logistics efficiency</span><div class="diag-bar-wrap"><div class="diag-bar anim-bar" data-width="72" style="background:#4ade80"></div></div><span class="diag-score">72</span></div>
+      <div class="diag-item"><span class="diag-label">Data maturity</span><div class="diag-bar-wrap"><div class="diag-bar anim-bar" data-width="38" style="background:#c8522a"></div></div><span class="diag-score">38</span></div>
+      <div class="diag-item"><span class="diag-label">Sustainability</span><div class="diag-bar-wrap"><div class="diag-bar anim-bar" data-width="29" style="background:#c8522a"></div></div><span class="diag-score">29</span></div>
     </div>
     <div class="diag-panel">
       <div class="diag-title">After 18-month engagement</div>
-      <div class="diag-item">
-        <span class="diag-label">Demand planning</span>
-        <div class="diag-bar-wrap"><div class="diag-bar" style="width:91%;background:#4ade80"></div></div>
-        <span class="diag-score">91</span>
-      </div>
-      <div class="diag-item">
-        <span class="diag-label">Supplier management</span>
-        <div class="diag-bar-wrap"><div class="diag-bar" style="width:84%;background:#4ade80"></div></div>
-        <span class="diag-score">84</span>
-      </div>
-      <div class="diag-item">
-        <span class="diag-label">Inventory control</span>
-        <div class="diag-bar-wrap"><div class="diag-bar" style="width:88%;background:#4ade80"></div></div>
-        <span class="diag-score">88</span>
-      </div>
-      <div class="diag-item">
-        <span class="diag-label">Logistics efficiency</span>
-        <div class="diag-bar-wrap"><div class="diag-bar" style="width:93%;background:#4ade80"></div></div>
-        <span class="diag-score">93</span>
-      </div>
-      <div class="diag-item">
-        <span class="diag-label">Data maturity</span>
-        <div class="diag-bar-wrap"><div class="diag-bar" style="width:79%;background:#4ade80"></div></div>
-        <span class="diag-score">79</span>
-      </div>
-      <div class="diag-item">
-        <span class="diag-label">Sustainability</span>
-        <div class="diag-bar-wrap"><div class="diag-bar" style="width:74%;background:#4ade80"></div></div>
-        <span class="diag-score">74</span>
-      </div>
+      <div class="diag-item"><span class="diag-label">Demand planning</span><div class="diag-bar-wrap"><div class="diag-bar anim-bar" data-width="91" style="background:#4ade80"></div></div><span class="diag-score">91</span></div>
+      <div class="diag-item"><span class="diag-label">Supplier management</span><div class="diag-bar-wrap"><div class="diag-bar anim-bar" data-width="84" style="background:#4ade80"></div></div><span class="diag-score">84</span></div>
+      <div class="diag-item"><span class="diag-label">Inventory control</span><div class="diag-bar-wrap"><div class="diag-bar anim-bar" data-width="88" style="background:#4ade80"></div></div><span class="diag-score">88</span></div>
+      <div class="diag-item"><span class="diag-label">Logistics efficiency</span><div class="diag-bar-wrap"><div class="diag-bar anim-bar" data-width="93" style="background:#4ade80"></div></div><span class="diag-score">93</span></div>
+      <div class="diag-item"><span class="diag-label">Data maturity</span><div class="diag-bar-wrap"><div class="diag-bar anim-bar" data-width="79" style="background:#4ade80"></div></div><span class="diag-score">79</span></div>
+      <div class="diag-item"><span class="diag-label">Sustainability</span><div class="diag-bar-wrap"><div class="diag-bar anim-bar" data-width="74" style="background:#4ade80"></div></div><span class="diag-score">74</span></div>
     </div>
   </div>
+  <div style="text-align:center;margin-top:2.5rem"><a href="pages/diagnostics.html" class="btn-primary">Run Your Own Diagnostic →</a></div>
 </section>
 
-<!-- CASE STUDIES -->
 <section class="cases" id="cases">
-  <div class="section-tag">Case studies</div>
+  <div class="section-tag">Case Studies</div>
   <h2 class="section-h">Results that compound</h2>
   <p class="section-p">Real engagements. Measurable outcomes. Verified by clients.</p>
   <div class="cases-grid">
-    <div class="case-card">
-      <div class="case-top" style="background:#1a3a5c">
-        <div class="case-ind" style="color:rgba(255,255,255,0.45)">Automotive — Tier 1 supplier</div>
-        <div class="case-name" style="color:#fff">Logistics network redesign across 4 countries</div>
-      </div>
-      <div class="case-body">
-        <div class="case-result" style="color:#c8522a">−31%</div>
-        <div class="case-result-lbl">Logistics cost reduction</div>
-        <div class="case-desc">Consolidated 12 distribution centers into 7 regional hubs, eliminating $18M in annual freight spend while improving delivery windows by 2 days.</div>
-      </div>
-    </div>
-    <div class="case-card">
-      <div class="case-top" style="background:#2e7d52">
-        <div class="case-ind" style="color:rgba(255,255,255,0.45)">FMCG — Global CPG brand</div>
-        <div class="case-name" style="color:#fff">Demand sensing &amp; AI forecasting</div>
-      </div>
-      <div class="case-body">
-        <div class="case-result" style="color:#2e7d52">99.1%</div>
-        <div class="case-result-lbl">Forecast accuracy (SKU level)</div>
-        <div class="case-desc">Deployed ML demand sensing across 6,000 SKUs in 28 markets. Reduced safety stock by 34%, freeing $45M in working capital.</div>
-      </div>
-    </div>
-    <div class="case-card">
-      <div class="case-top" style="background:#7a3520">
-        <div class="case-ind" style="color:rgba(255,255,255,0.45)">Pharma — European manufacturer</div>
-        <div class="case-name" style="color:#fff">End-to-end supply chain visibility</div>
-      </div>
-      <div class="case-body">
-        <div class="case-result" style="color:#b8922a">−58%</div>
-        <div class="case-result-lbl">Lead time reduction</div>
-        <div class="case-desc">Built a real-time control tower integrating 140 supplier data feeds, reducing order-to-delivery lead time from 26 to 11 days on critical lines.</div>
-      </div>
-    </div>
+    <a href="pages/case-studies.html#automotive" class="case-card">
+      <div class="case-top" style="background:#1a3a5c"><div class="case-ind" style="color:rgba(255,255,255,0.45)">Automotive — Tier 1 supplier</div><div class="case-name" style="color:#fff">Logistics network redesign across 4 countries</div></div>
+      <div class="case-body"><div class="case-result" style="color:#c8522a">−31%</div><div class="case-result-lbl">Logistics cost reduction</div><div class="case-desc">Consolidated 12 distribution centers into 7 regional hubs, eliminating $18M in annual freight spend.</div><span class="case-link">Read full case study →</span></div>
+    </a>
+    <a href="pages/case-studies.html#fmcg" class="case-card">
+      <div class="case-top" style="background:#2e7d52"><div class="case-ind" style="color:rgba(255,255,255,0.45)">FMCG — Global CPG brand</div><div class="case-name" style="color:#fff">Demand sensing &amp; AI forecasting</div></div>
+      <div class="case-body"><div class="case-result" style="color:#2e7d52">99.1%</div><div class="case-result-lbl">Forecast accuracy (SKU level)</div><div class="case-desc">Deployed ML demand sensing across 6,000 SKUs in 28 markets, freeing $45M in working capital.</div><span class="case-link">Read full case study →</span></div>
+    </a>
+    <a href="pages/case-studies.html#pharma" class="case-card">
+      <div class="case-top" style="background:#7a3520"><div class="case-ind" style="color:rgba(255,255,255,0.45)">Pharma — European manufacturer</div><div class="case-name" style="color:#fff">End-to-end supply chain visibility</div></div>
+      <div class="case-body"><div class="case-result" style="color:#b8922a">−58%</div><div class="case-result-lbl">Lead time reduction</div><div class="case-desc">Built a real-time control tower integrating 140 supplier data feeds, cutting lead times from 26 to 11 days.</div><span class="case-link">Read full case study →</span></div>
+    </a>
   </div>
+  <div style="text-align:center;margin-top:2.5rem"><a href="pages/case-studies.html" class="btn-ghost">View all case studies →</a></div>
 </section>
 
-<!-- DATA PLATFORM -->
 <section class="data-section" id="platform">
-  <div class="section-tag">Data platform</div>
+  <div class="section-tag">Data Platform</div>
   <h2 class="section-h">Decision intelligence, not just reporting</h2>
   <p class="section-p">Our client platform turns operational data into recommended actions — with full audit trail and scenario modeling.</p>
   <div class="data-grid">
     <div class="framework-list">
-      <div class="fw-item">
-        <span class="fw-num">01</span>
-        <div class="fw-text">
-          <h4>Connect your data sources</h4>
-          <p>ERP, WMS, TMS, supplier portals — all unified in one schema</p>
-        </div>
-      </div>
-      <div class="fw-item">
-        <span class="fw-num">02</span>
-        <div class="fw-text">
-          <h4>Automated anomaly detection</h4>
-          <p>AI flags disruptions and supply risks before they escalate</p>
-        </div>
-      </div>
-      <div class="fw-item">
-        <span class="fw-num">03</span>
-        <div class="fw-text">
-          <h4>Scenario modeling</h4>
-          <p>Simulate sourcing shifts, demand spikes, and network changes</p>
-        </div>
-      </div>
-      <div class="fw-item">
-        <span class="fw-num">04</span>
-        <div class="fw-text">
-          <h4>Prescriptive recommendations</h4>
-          <p>Ranked action list with projected impact and confidence scores</p>
-        </div>
-      </div>
+      <div class="fw-item"><span class="fw-num">01</span><div class="fw-text"><h4>Connect your data sources</h4><p>ERP, WMS, TMS, supplier portals — all unified in one schema</p></div></div>
+      <div class="fw-item"><span class="fw-num">02</span><div class="fw-text"><h4>Automated anomaly detection</h4><p>AI flags disruptions and supply risks before they escalate</p></div></div>
+      <div class="fw-item"><span class="fw-num">03</span><div class="fw-text"><h4>Scenario modeling</h4><p>Simulate sourcing shifts, demand spikes, and network changes</p></div></div>
+      <div class="fw-item"><span class="fw-num">04</span><div class="fw-text"><h4>Prescriptive recommendations</h4><p>Ranked action list with projected impact and confidence scores</p></div></div>
+      <div style="margin-top:1rem"><a href="pages/platform.html" class="btn-primary">Explore the Platform →</a></div>
     </div>
     <div class="chart-panel">
-      <div class="chart-panel-title">
-        Inventory performance model
-        <div class="chart-tabs">
-          <span class="tab active" onclick="setTab(this)">90d</span>
-          <span class="tab" onclick="setTab(this)">YTD</span>
-          <span class="tab" onclick="setTab(this)">Custom</span>
-        </div>
-      </div>
-      <div style="position:relative;height:220px">
-        <canvas id="perfChart" role="img" aria-label="Line chart showing actual vs target inventory turns over 12 weeks">Inventory turns rising from 8.1 to 12.4; target stable at 11.0.</canvas>
-      </div>
-      <div class="chart-legend">
-        <span class="legend-item"><span class="legend-swatch" style="background:#1a3a5c"></span>Actual turns</span>
-        <span class="legend-item"><span class="legend-swatch legend-dashed"></span>Target</span>
-      </div>
+      <div class="chart-panel-title">Inventory performance model<div class="chart-tabs"><span class="tab active" onclick="setTab(this,'90d')">90d</span><span class="tab" onclick="setTab(this,'ytd')">YTD</span><span class="tab" onclick="setTab(this,'1y')">1Y</span></div></div>
+      <div style="position:relative;height:220px"><canvas id="perfChart"></canvas></div>
+      <div class="chart-legend"><span class="legend-item"><span class="legend-swatch" style="background:#1a3a5c"></span>Actual turns</span><span class="legend-item"><span class="legend-dashed"></span>Target</span></div>
     </div>
   </div>
 </section>
 
-<!-- CTA -->
 <div class="cta-section" id="cta">
   <div>
     <div class="eyebrow" style="color:rgba(200,82,42,0.7)">Start the conversation</div>
@@ -322,26 +157,32 @@
   </div>
   <div class="cta-right">
     <div class="cta-input-row">
-      <input class="cta-input" type="text" placeholder="Your name" />
-      <input class="cta-input" type="text" placeholder="Company" />
+      <input class="cta-input" id="cta-name" type="text" placeholder="Your name" />
+      <input class="cta-input" id="cta-company" type="text" placeholder="Company" />
     </div>
-    <input class="cta-input" type="email" placeholder="Work email" />
-    <button class="btn-primary cta-btn" onclick="alert('Thank you! We\'ll be in touch within 1 business day.')">Request diagnostic call →</button>
+    <input class="cta-input" id="cta-email" type="email" placeholder="Work email" />
+    <button class="btn-primary cta-submit-btn" onclick="submitCTA()">Request Diagnostic Call →</button>
     <span class="cta-note">Responses within 1 business day · No spam, ever</span>
+    <div id="cta-success" class="cta-success" style="display:none">✅ Thank you! We'll be in touch within 1 business day.</div>
   </div>
 </div>
 
-<!-- FOOTER -->
 <footer>
-  <div class="footer-logo">VEXA<span>.</span>CHAIN</div>
-  <div class="footer-links">
-    <a href="#">Services</a>
-    <a href="#">Case studies</a>
-    <a href="#">Platform</a>
-    <a href="#">Careers</a>
-    <a href="#">Privacy</a>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="index.html" class="footer-logo">VEXA<span>.</span>CHAIN</a>
+      <p class="footer-tagline">Data-driven operations &amp; supply chain consulting for companies that compete on execution.</p>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col"><h4>Services</h4><a href="pages/services.html#supply-chain">Supply Chain Design</a><a href="pages/services.html#demand">Demand Planning</a><a href="pages/services.html#opex">Operational Excellence</a><a href="pages/services.html#logistics">Logistics</a><a href="pages/services.html#digital">Digital &amp; Automation</a><a href="pages/services.html#esg">Sustainability</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="pages/case-studies.html">Case Studies</a><a href="pages/platform.html">Data Platform</a><a href="pages/diagnostics.html">Diagnostics</a><a href="#cta">Contact</a></div>
+      <div class="footer-col"><h4>Client Access</h4><a href="pages/dashboard.html">Dashboard Login</a><a href="pages/platform.html">Platform Docs</a></div>
+    </div>
   </div>
-  <span class="footer-copy">© 2026 VexaChain Consulting. All rights reserved.</span>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 VexaChain Consulting. All rights reserved.</span>
+    <div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
+  </div>
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
